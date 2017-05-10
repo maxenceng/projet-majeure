@@ -20,6 +20,7 @@ public class RobotCrt {
 		int yFinal = this.robot.getCoord().getY() + d.y;
 		if(this.isMoveOk(xFinal, yFinal)) {
 			this.robot.getCapteur().updateMatrice(this.robot.getOrientation(), d.o);
+			this.robot.setOrientation(d.o);
 			this.robot.setCoord(new Coord(xFinal, yFinal));
 		}
 	}

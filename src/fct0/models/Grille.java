@@ -31,6 +31,7 @@ public class Grille {
 		matrice[x][y]=type;
 	}
 	
+	
 	public int getX(){
 		return this.x;
 	}
