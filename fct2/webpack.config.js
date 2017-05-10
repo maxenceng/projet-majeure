@@ -1,5 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
+const htmlWebpackPlugin = require('html-webpack-plugin')
+
+const htmlWebpackPluginConfig = new htmlWebpackPlugin({
+  template: './app/html/index.html',
+  filename: 'index.html',
+  inject: 'body'
+})
+
 
 module.exports = {
   entry: [
@@ -7,7 +15,6 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '/dist'),
-    publicPath: 'http://localhost:8080/dist', // Utile lors du developement
     filename: 'bundle.js',
   },
   module: {
@@ -22,6 +29,7 @@ module.exports = {
    * Plugins pour permettre d'utiliser le HMR (Hot Module Replacement)
    */
   plugins: [
+    htmlWebpackPluginConfig,
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),

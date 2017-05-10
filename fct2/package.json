@@ -25,8 +25,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "babel-cli": "^6.24.1",
-    "express": "^4.15.2",
-    "path": "^0.12.7"
+    "chart.js": "^2.5.0",
+    "html-webpack-plugin": "^2.28.0"
   }
 }
