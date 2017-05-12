@@ -1,35 +1,78 @@
 import Chart from 'chart.js'
+import sass from '../sass/index.sass'
 
-const ctx = document.getElementById("myChart")
+console.log(window.location) // Sert à récupérer la route actuelle
 
-let data = [{ x: -10,y: 0 }, { x: 0,y: 10 }, { x: 10, y: 5 }]
+const chart1 = document.querySelector('#myChart1')
+const chart2 = document.querySelector('#myChart2')
+const chart3 = document.querySelector('#myChart3')
 
+let labels = []
+let dataValues = []
 
-
-let scatterChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        datasets: [{
-            label: 'Scatter Dataset',
-            data: [{
-                x: -10,
-                y: 0
-            }, {
-                x: 0,
-                y: 10
-            }, {
-                x: 10,
-                y: 5
-            }]
-        }]
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                type: 'linear',
-                position: 'bottom'
-            }]
+let data = {
+    labels: labels,
+    datasets: [
+        {
+            fill: false,
+            lineTension: 0,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            data: dataValues,
         }
-    }
+    ]
+}
+
+let options = {
+  responsive: false,
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+  }
+}
+
+let content = {
+  type: 'line',
+  data: data,
+  options: options
+}
+
+let lineChart1 = new Chart(chart1, content)
+let lineChart2 = new Chart(chart2, content)
+let lineChart3 = new Chart(chart3, content)
+
+let i = 0
+//setInterval(test, 1000)  /* SCRIPT A DECOMMENTER EN DEHORS DE LA VM */
+
+
+function test() {
+  labels.push(i)
+  i++
+  dataValues.push(Math.random()) // A remplacer par l'appel AJAX
+  lineChart1.data.labels = labels
+  lineChart1.data.datasets[0].data = dataValues
+  lineChart1.update()
+  lineChart2.data.labels = labels
+  lineChart2.data.datasets[0].data = dataValues
+  lineChart2.update()
+  lineChart3.data.labels = labels
+  lineChart3.data.datasets[0].data = dataValues
+  lineChart3.update()
+}
+
+// A remplacer par les requetes AJAX
+document.querySelector('#btnUp').addEventListener('click', () => {
+  alert('UP')
 })
 
+document.querySelector('#btnLeft').addEventListener('click', () => {
+  alert('LEFT')
+})
+
+document.querySelector('#btnRight').addEventListener('click', () => {
+  alert('RIGHT')
+})
+
+document.querySelector('#btnDown').addEventListener('click', () => {
+  alert('DOWN')
+})

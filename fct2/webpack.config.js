@@ -20,6 +20,8 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.sass$/, loader: ['style-loader', 'css-loader', 'sass-loader'], exclude: /node_modules/ },
+      { test: /\.(jpg|eot|svg|ttf|woff|woff2)$/, loader: ['url-loader'], exclude: /node_modules/ },
     ],
   },
   devServer: {
