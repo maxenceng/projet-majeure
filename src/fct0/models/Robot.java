@@ -1,5 +1,6 @@
 package fct0.models;
 
+import fct0.utils.Contenu;
 import fct0.utils.Coord;
 import fct0.utils.Orientation;
 
@@ -9,6 +10,7 @@ public class Robot {
 	private Orientation orientation;
 	private Env env;
 	private Capteur capteur;
+	private Contenu type;
 	
 	public Robot(Coord coord, Orientation orientation) {
 		this.coord = coord;

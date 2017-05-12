@@ -18,7 +18,7 @@ import fct0.models.Robot;
 import fct0.utils.Coord;
 import fct0.utils.Orientation;
 import fct0.utils.Direction;
-
+import fct0.utils.Contenu;
 
 @Path("/cmd")
 public class RobotControlService {
@@ -30,12 +30,10 @@ public class RobotControlService {
 	ServletContext context;
 	
 	
-	Coord coordonnee=new Coord(0,0);
+	Coord coordonnee=new Coord(0,2);
 	Robot robinet=new Robot(coordonnee,Orientation.S);
 	Env environnement=new Env(5,5,10);
 	RobotCrt robotControl=new RobotCrt(environnement,robinet);
-	
-
 	
 	
 	//After RestService construction launches init method
@@ -63,6 +61,7 @@ public class RobotControlService {
 		public void goUp()
 		{
 			robotControl.move(Direction.UP);
+			getEnv();
 		}
 		
 		@POST
@@ -71,6 +70,7 @@ public class RobotControlService {
 		public void goDown()
 		{
 			robotControl.move(Direction.DOWN);
+			getEnv();
 		}
 		
 		@POST
@@ -79,61 +79,80 @@ public class RobotControlService {
 		public void goRight()
 		{
 			robotControl.move(Direction.RIGHT);
+			getEnv();
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("LEFT")
-		public void goLeft()
+		public String goLeft()
 		{
+			
+			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+			System.out.println(robotControl.getEnv().printMatrix(matrice1));
 			robotControl.move(Direction.LEFT);
+			matrice1=robotControl.getEnv().getGrille().getMatrice();
+			System.out.println(robotControl.getEnv().printMatrix(matrice1));
+			return "";
+		
 		}
+		
+		
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("env")
 		public String getEnv()
-				{
-			//create Json container Object
+		{
 			JSONObject objContainer = new JSONObject();
-			
-			//create set of json objects
-			JSONObject objVal1 = new JSONObject();
-			//objVal1.put("x",coordonnee.getX());
-			objVal1.put("x",new Integer(0));
-			objVal1.put("y",new Integer(0));
-			objVal1.put("val","FREE");
-			JSONObject objVal2 = new JSONObject();
-			objVal2.put("x",new Integer(0));
-			objVal2.put("y",new Integer(1));
-			objVal2.put("val","WALL");
-			JSONObject objVal3 = new JSONObject();
-			objVal3.put("x",new Integer(1));
-			objVal3.put("y",new Integer(1));
-			objVal3.put("val","ROBOT");
-			
-			/*environnement.generateEnvironnement();
-			
-			JSONObject objTest = new JSONObject();
-			objTest.put("grille",environnement.printMatrix(environnement.getGrille().getMatrice()));*/
+			int x=0; 
+			int y=0;
+			int tailleX=environnement.getTailleX();
+			int tailleY=environnement.getTailleY();
+			int tailleXY=environnement.getTailleXY();
+			Contenu currentContenu;
 			
 			
-			//create a json list
 			JSONArray list = new JSONArray();
-			//add json objects to jsonlist
-			list.add(objVal1);
-			list.add(objVal2);
-			list.add(objVal3);
-			//list.add(objTest);
+			
+			for(x=0;x<tailleX;x++)
+			{
+				for(y=0;y<tailleY;y++)
+				{
+					JSONObject objVal1 = new JSONObject();
+					currentContenu=robotControl.getEnv().getGrille().getContenuG(x,y);		
+				
+					objVal1.put("x",x);
+					list.add(objVal1);	
+					objVal1.put("y",y);	
+					list.add(objVal1);
+					objVal1.put("état",currentContenu.toString());
+					list.add(objVal1);
+			
+					//objContainer.put("data", list);
+				}
+				
+			}
+				
+	
+			
 			
 			//add jsonlist to json container
-			objContainer.put("data", list);
+			objContainer.put("cissou", list);
+			
+			
 			
 			//return json string of the json container
 			return objContainer.toJSONString();
-			
-			
-			//ALTERNATIVE send direct a json String
-			//return "{\"data\":[{\"x\":0,\"y\":0,\"val\":\"FREE\"},{\"x\":0,\"y\":1,\"val\":\"WALL\"},{\"x\":1,\"y\":1,\"val\":\"ROBOT\"}]}";
-		}
 
+	
+		}
+		public static void main(String[] args){
+			RobotControlService robottest=new RobotControlService();
+			System.out.println(robottest.getEnv());
+			System.out.println("-----------------------------------------------------");
+			System.out.println(robottest.goLeft());
+			System.out.println("-----------------------------------------------------");
+			System.out.println(robottest.getEnv());
+			
+		}
 }

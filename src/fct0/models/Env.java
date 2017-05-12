@@ -12,6 +12,7 @@ public class Env {
 	private Grille grille;
 	private int tailleX=0,tailleY=0;
 	
+	
 	/**
 	 * Cette méthode initialise la taille de la matrice et le pourcentage de chance d'avoir un obstacle dans une cellule
 	 * @param xinit
@@ -34,6 +35,7 @@ public class Env {
 		double chance=0;
 		pourcentageObstacle=pourcentageObstacle*0.01;
 		
+		
 		for(x=0;x<tailleX;x++)
 		{
 			for(y=0;y<tailleY;y++)
@@ -55,6 +57,17 @@ public class Env {
 		return grille.getMatrice()[x][y];
 	}
 
+	public void setContenu(Contenu contenu,int x,int y)
+	{
+		grille.setContenuG(contenu,x,y);
+	}
+	public Contenu getContenu(int x,int y)
+	{
+		return grille.getContenuG(x,y);
+	}
+	
+	
+	
 	public String printMatrix(Contenu[][] matrix) {
 		StringBuilder sb = new StringBuilder();
 		Formatter formatter = new Formatter(sb, Locale.FRENCH);
@@ -90,6 +103,12 @@ public class Env {
 	
 	public int getTailleY() {
 		return this.tailleY;
+	}
+	
+	public int getTailleXY(){
+		int taille;
+		taille=this.tailleX*this.tailleY;
+		return taille;
 	}
 
 }
