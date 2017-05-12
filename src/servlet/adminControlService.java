@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/adminControlService")
 public class adminControlService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,21 +29,36 @@ public class adminControlService extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ServletContext app = request.getServletContext();
+		String etatSession = (String) app.getAttribute("statusCourant"); 
+		String redirectJsp = null;
+		
+
 		String submit = request.getParameter("submit");
 		switch(submit){
 		case "logout":
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(true);
 			session.removeAttribute("username");
 			session.invalidate();
-			response.sendRedirect("adminLogin.jsp");
+			redirectJsp = "login.jsp";
 			break;
-		case "start":
-			
+		case "started":
+			if(etatSession=="stopped"){
+				etatSession="started";
+				app.setAttribute("statusCourant", etatSession);
+			}
+			redirectJsp = "admin.jsp";
 			break;		
-		case "stop":
-			
+		case "stopped":
+			if(etatSession=="started"){
+				etatSession="stopped";
+				app.setAttribute("statusCourant", etatSession);
+			}
+			redirectJsp = "admin.jsp";
 			break;	
 		}
+		response.sendRedirect(redirectJsp);
 	}
 
 	/**

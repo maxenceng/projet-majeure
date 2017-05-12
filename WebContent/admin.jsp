@@ -10,13 +10,22 @@
 	<%
 		if(session.getAttribute("username")==null)
 		{
-			response.sendRedirect("adminLogin.jsp");
+			response.sendRedirect("login.jsp");
+		}
+		String etat = (String) application.getAttribute("statusCourant");
+		if( application.getAttribute("statusCourant") == null){
+
+			application.setAttribute("statusCourant", "stopped");
 		}
 	%>
+	
+		
+		${statusCourant}
+		
 		Welcome ${username}
 		<form action="adminControlService">
-		<input type="submit" NAME="submit" value="start">
-		<input type="submit" NAME="submit" value="stop">
+		<input type="submit" NAME="submit" value="started">
+		<input type="submit" NAME="submit" value="stopped">
 		<input type="submit" NAME="submit" value="logout">
 		</form>
 </body>

@@ -43,7 +43,7 @@ public class checkAuth extends HttpServlet {
 		}
 		else
 		{
-			response.sendRedirect("adminLogin.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	}
 
