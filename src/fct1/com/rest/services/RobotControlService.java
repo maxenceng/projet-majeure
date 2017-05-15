@@ -19,67 +19,53 @@ import fct0.utils.Coord;
 import fct0.utils.Orientation;
 import fct0.utils.Direction;
 import fct0.utils.Contenu;
+import fct1.com.rest.services.AppelRobot;
+
 
 @Path("/cmd")
 public class RobotControlService {
-	
-	//private final static String ROBOT_SIMULATOR_LABEL="robot_simulator";
 	
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
 	
-	
-	Coord coordonnee=new Coord(0,2);
-	Robot robinet=new Robot(coordonnee,Orientation.S);
-	Env environnement=new Env(5,5,10);
-	RobotCrt robotControl=new RobotCrt(environnement,robinet);
-	
-	
-	//After RestService construction launches init method
-		/*@PostConstruct
-		public void init(){
-			checkRobot();
-		}
 
-		private void checkRobot() {
-			Object obj=context.getAttribute(ROBOT_SIMULATOR_LABEL);
-			if(obj==null){
-				
-				//TODO
-			}else{
-				//TODO
-			}
-			
-		}
-		*/
-	
+		RobotCrt robotControl =AppelRobot.getAppelRobot();
 	
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
-		public void goUp()
+		public String goUp()
 		{
 			robotControl.move(Direction.UP);
-			getEnv();
+			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+			System.out.println(robotControl.getEnv().printMatrix(matrice1));
+			getEnvironnement();
+			return "";
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("DOWN")
-		public void goDown()
+		public String goDown()
 		{
 			robotControl.move(Direction.DOWN);
-			getEnv();
+			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+			System.out.println(robotControl.getEnv().printMatrix(matrice1));
+			getEnvironnement();
+			return "";
 		}
 		
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("RIGHT")
-		public void goRight()
+		public String goRight()
 		{
 			robotControl.move(Direction.RIGHT);
-			getEnv();
+			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+			System.out.println(robotControl.getEnv().printMatrix(matrice1));
+			getEnvironnement();
+			return "";
 		}
 		
 		@POST
@@ -88,11 +74,10 @@ public class RobotControlService {
 		public String goLeft()
 		{
 			
+			robotControl.move(Direction.LEFT);
 			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
 			System.out.println(robotControl.getEnv().printMatrix(matrice1));
-			robotControl.move(Direction.LEFT);
-			matrice1=robotControl.getEnv().getGrille().getMatrice();
-			System.out.println(robotControl.getEnv().printMatrix(matrice1));
+			getEnvironnement();
 			return "";
 		
 		}
@@ -101,14 +86,14 @@ public class RobotControlService {
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("env")
-		public String getEnv()
+		public String getEnvironnement()
 		{
 			JSONObject objContainer = new JSONObject();
 			int x=0; 
 			int y=0;
-			int tailleX=environnement.getTailleX();
-			int tailleY=environnement.getTailleY();
-			int tailleXY=environnement.getTailleXY();
+			int tailleX=robotControl.getEnv().getTailleX();
+			int tailleY=robotControl.getEnv().getTailleY();
+			int tailleXY=robotControl.getEnv().getTailleXY();
 			Contenu currentContenu;
 			
 			
@@ -118,29 +103,24 @@ public class RobotControlService {
 			{
 				for(y=0;y<tailleY;y++)
 				{
+			
 					JSONObject objVal1 = new JSONObject();
 					currentContenu=robotControl.getEnv().getGrille().getContenuG(x,y);		
-				
+					objVal1.put("état",currentContenu.toString());
+					//list.add(objVal1);
 					objVal1.put("x",x);
-					list.add(objVal1);	
+					//list.add(objVal1);	
 					objVal1.put("y",y);	
 					list.add(objVal1);
-					objVal1.put("état",currentContenu.toString());
-					list.add(objVal1);
-			
-					//objContainer.put("data", list);
+
 				}
 				
 			}
-				
-	
-			
-			
+		
 			//add jsonlist to json container
-			objContainer.put("cissou", list);
+			objContainer.put("donnees", list);
 			
-			
-			
+		
 			//return json string of the json container
 			return objContainer.toJSONString();
 
@@ -148,11 +128,13 @@ public class RobotControlService {
 		}
 		public static void main(String[] args){
 			RobotControlService robottest=new RobotControlService();
-			System.out.println(robottest.getEnv());
+			System.out.println(robottest.getEnvironnement());
 			System.out.println("-----------------------------------------------------");
+			System.out.println(robottest.goUp());
+			System.out.println("-----------------------------------------------------");
+			System.out.println(robottest.getEnvironnement());
 			System.out.println(robottest.goLeft());
 			System.out.println("-----------------------------------------------------");
-			System.out.println(robottest.getEnv());
-			
+			System.out.println(robottest.getEnvironnement());
 		}
 }

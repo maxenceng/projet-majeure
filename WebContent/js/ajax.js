@@ -1,5 +1,9 @@
 $(document).ready(function(){
   $("#myButton").click(function(){
+	  
+	  //On récupère l'état envoyé par l'admin et on test :
+	  //If a rajouter ici.
+	  
 	  	$.post("rest/cmd/UP",
     		  {},
     		  function(data,status){

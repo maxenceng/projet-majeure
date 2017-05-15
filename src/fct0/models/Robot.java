@@ -12,11 +12,13 @@ public class Robot {
 	private Capteur capteur;
 	private Contenu type;
 	
-	public Robot(Coord coord, Orientation orientation) {
-		this.coord = coord;
+	public Robot(Coord coordonnee,Orientation orientation) {
+
+		this.coord =coordonnee;
 		this.orientation = orientation;
 		this.env = null;
 		this.capteur = new Capteur();
+		
 	}
 	
 	public Coord getCoord() {

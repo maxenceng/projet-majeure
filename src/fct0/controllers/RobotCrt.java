@@ -35,7 +35,7 @@ public class RobotCrt {
 	}
 	
 	public Boolean isMoveOk(int xFinal, int yFinal) {
-		if(xFinal < 0 || xFinal > this.env.getTailleX() || yFinal < 0 || yFinal > this.env.getTailleY()) {
+		if(xFinal < 0 || xFinal >= this.env.getTailleX() || yFinal < 0 || yFinal >= this.env.getTailleY()) {
 			return false;
 		}
 		return true;
