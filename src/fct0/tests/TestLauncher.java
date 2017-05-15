@@ -17,14 +17,13 @@ public class TestLauncher {
 		cap.updateMatrice(robot.getOrientation(), Orientation.E);
 		
 		Env env = new Env(6,6,10);
-		env.generateEnvironnement();
 		RobotCrt robotCrt = new RobotCrt(env, robot);
 		Contenu[][] matrice = robotCrt.getEnv().getGrille().getMatrice();
 		System.out.println(robotCrt.getEnv().printMatrix(matrice));
 		System.out.println(robotCrt.getRobot().getCoord());
-		robotCrt.move(Direction.UP);
+		robotCrt.move(Direction.LEFT);
 		System.out.println(robotCrt.getRobot().getCoord());
-		
+		System.out.println(robotCrt.getEnv().printMatrix(matrice));
 		System.out.println(robotCrt.getRobot().getCapteur());
 		
 	}
