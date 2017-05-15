@@ -3,8 +3,8 @@ const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 const htmlWebpackPluginConfig = new htmlWebpackPlugin({
-  template: './app/html/index.html',
-  filename: 'index.html',
+  template: './app/html/refresh-auto.html',
+  filename: 'refresh-auto.html',
   inject: 'body'
 })
 
