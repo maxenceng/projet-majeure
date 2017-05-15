@@ -38,4 +38,14 @@ public class Grille {
 	public int getY(){
 		return this.y;
 	}
+	
+	public Contenu getContenuG(int x,int y){
+		return this.matrice[x][y];
+		
+	}
+	
+	public void setContenuG(Contenu contenu,int x,int y){
+		this.matrice[x][y]=contenu;
+		
+}
 }

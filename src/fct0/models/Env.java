@@ -22,14 +22,13 @@ public class Env {
 		tailleX=xinit;
 		tailleY=yinit;
 		pourcentageObstacle=pourcentageinit;
-		this.generateEnvironnement();
+		grille = new Grille(tailleX, tailleY);
 	}
 	
 	/**
 	 * 
 	 */
 	public void generateEnvironnement(){
-		grille=new Grille(tailleX,tailleY); //Création de la matrice
 		int x=0,y=0;
 		double chance=0;
 		pourcentageObstacle=pourcentageObstacle*0.01;
@@ -45,7 +44,12 @@ public class Env {
 					grille.setMatrice(x,y,Contenu.FREE);
 			}
 		}
-		
+	}
+	
+	@Override
+	public String toString() {
+		Contenu[][] matrice = this.grille.getMatrice();
+		return this.printMatrix(matrice);
 	}
 	
 	public Contenu findContenu(int x,int y){
@@ -91,5 +95,14 @@ public class Env {
 	public int getTailleY() {
 		return this.tailleY;
 	}
+
+	public void setContenu(Contenu contenu, int x, int y) {
+		grille.setContenuG(contenu,x,y);
+	}
+	
+	public Contenu getContenu(int x,int y)
+	{
+		return grille.getContenuG(x,y);
+}
 
 }

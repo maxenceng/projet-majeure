@@ -15,6 +15,7 @@ public class Robot {
 		this.orientation = orientation;
 		this.env = null;
 		this.capteur = new Capteur();
+		this.capteur.updateMatrice(Orientation.S, orientation);
 	}
 	
 	public Coord getCoord() {

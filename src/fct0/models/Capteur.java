@@ -71,4 +71,8 @@ public class Capteur {
 		return this.matrice;
 	}
 	
+	public int getTaille() {
+		return this.matrice.length;
+	}
+	
 }
