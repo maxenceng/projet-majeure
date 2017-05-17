@@ -22,6 +22,14 @@ public class TestLauncher {
 		System.out.println(robotCrt.getEnvRobot());
 		robotCrt.move(Direction.DOWN);
 		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.DOWN);
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.DOWN);
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.LEFT);
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.LEFT);
+		System.out.println(robotCrt.getEnvRobot());
 		
 	}
 }
