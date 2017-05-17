@@ -3,6 +3,7 @@ package fct0.tests;
 import fct0.controllers.RobotCrt;
 import fct0.models.Capteur;
 import fct0.models.Env;
+import fct0.models.Measures;
 import fct0.models.Robot;
 import fct0.utils.Contenu;
 import fct0.utils.Coord;
@@ -30,6 +31,10 @@ public class TestLauncher {
 		System.out.println(robotCrt.getEnvRobot());
 		robotCrt.move(Direction.LEFT);
 		System.out.println(robotCrt.getEnvRobot());
+		System.out.println("obstacles visibles " + Measures.getNbreObstVisible());
+		System.out.println("obstacles rencontres " +Measures.getNbreObstRencontres());
+		System.out.println("nombre commandes " + Measures.getNbreCommande());
+		System.out.println("distance parcourue " + Measures.getDistanceParcourue());
 		
 	}
 }

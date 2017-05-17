@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fct0.models.Env;
+import fct0.models.Measures;
 import fct0.models.Robot;
 import fct0.utils.Coord;
 import fct0.utils.Direction;
@@ -24,6 +25,7 @@ public class RobotCrt {
 	}
 	
 	public void move(Direction d) {
+		Measures.incrementNbreCommande();
 		int xInit=this.robot.getCoord().getX();
 		int xFinal = xInit + d.x; 
 		int yInit=this.robot.getCoord().getY();
@@ -35,6 +37,7 @@ public class RobotCrt {
 			env.setContenu(Contenu.FREE,xInit,yInit);
 			env.setContenu(Contenu.ROBOT,xFinal,yFinal);
 			this.updateEnvRobot();
+			Measures.incrementDistanceParcourue();
 		}
 		
 	}
@@ -43,7 +46,11 @@ public class RobotCrt {
 		if(xFinal < 0 || xFinal >= this.env.getTailleX() || yFinal < 0 || yFinal >= this.env.getTailleY()) {
 			return false;
 		}
-		if(this.getEnv().findContenu(xFinal, yFinal) == Contenu.OBSTACLE || this.getEnv().findContenu(xFinal, yFinal) == Contenu.ROBOT) {
+		if(this.getEnv().findContenu(xFinal, yFinal) == Contenu.OBSTACLE) {
+			Measures.incrementNbreObstRencontres();
+			return false;
+		}
+		if(this.getEnv().findContenu(xFinal, yFinal) == Contenu.ROBOT) {
 			return false;
 		}
 		return true;
@@ -99,9 +106,15 @@ public class RobotCrt {
 		int x = this.robot.getCoord().getX();
 		int y = this.robot.getCoord().getY();
 		for(Coord c : this.getPositionsADecouvrirMatrice()) {
-			Contenu cont = this.env.findContenu(x + c.getX(), y + c.getY());
-			if(cont != null)  {
-				this.getEnvRobot().setContenu(cont, x + c.getX(), y + c.getY());
+			Contenu contenuEnv = this.env.findContenu(x + c.getX(), y + c.getY());
+			Contenu contenuEnvRobot = this.getEnvRobot().findContenu(x + c.getX(), y + c.getY());
+			if(contenuEnv != null && contenuEnvRobot != null) {
+				if(contenuEnvRobot.equals(Contenu.UNKNOWN) || contenuEnvRobot.equals(Contenu.ROBOT)) {
+					this.getEnvRobot().setContenu(contenuEnv, x + c.getX(), y + c.getY());
+					if(contenuEnv.equals(Contenu.OBSTACLE)) {
+						Measures.incrementNbreObstVisible();
+					}
+				}
 			}
 		}
 		this.getEnvRobot().setContenu(Contenu.ROBOT, x, y);
