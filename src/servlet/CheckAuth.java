@@ -17,13 +17,13 @@ import db.DB;
  * Servlet implementation class checkAuth
  */
 @WebServlet("/checkAuth")
-public class checkAuth extends HttpServlet {
+public class CheckAuth extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DB db;
     /**
      * Default constructor. 
      */
-    public checkAuth() {
+    public CheckAuth() {
         // TODO Auto-generated constructor stub
     }
 

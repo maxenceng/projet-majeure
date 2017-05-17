@@ -5,6 +5,7 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import servlet.AdminControlService;
 import fct0.controllers.RobotCrt;
 import fct0.models.Env;
 import fct0.models.Robot;
@@ -35,12 +37,15 @@ public class RobotControlService {
 		@POST
 		@Produces(MediaType.TEXT_PLAIN)
 		@Path("UP")
-		public String goUp()
+		public String goUp(@PathParam("status")String status)
 		{
-			robotControl.move(Direction.UP);
-			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-			System.out.println(robotControl.getEnv().printMatrix(matrice1));
-			getEnvironnement();
+			if(AdminControlService.status.equals("started")) {
+				robotControl.move(Direction.UP);
+				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+				System.out.println(robotControl.getEnv().printMatrix(matrice1));
+				getEnvironnement();
+				return AdminControlService.status;
+			}
 			return "";
 		}
 		
@@ -49,10 +54,13 @@ public class RobotControlService {
 		@Path("DOWN")
 		public String goDown()
 		{
-			robotControl.move(Direction.DOWN);
-			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-			System.out.println(robotControl.getEnv().printMatrix(matrice1));
-			getEnvironnement();
+			if(AdminControlService.status.equals("started")) {
+				robotControl.move(Direction.DOWN);
+				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+				System.out.println(robotControl.getEnv().printMatrix(matrice1));
+				getEnvironnement();
+				return AdminControlService.status;
+			}
 			return "";
 		}
 		
@@ -61,10 +69,13 @@ public class RobotControlService {
 		@Path("RIGHT")
 		public String goRight()
 		{
-			robotControl.move(Direction.RIGHT);
-			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-			System.out.println(robotControl.getEnv().printMatrix(matrice1));
-			getEnvironnement();
+			if(AdminControlService.status.equals("started")) {
+				robotControl.move(Direction.RIGHT);
+				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+				System.out.println(robotControl.getEnv().printMatrix(matrice1));
+				getEnvironnement();
+				return AdminControlService.status;
+			}
 			return "";
 		}
 		
@@ -73,11 +84,13 @@ public class RobotControlService {
 		@Path("LEFT")
 		public String goLeft()
 		{
-			
-			robotControl.move(Direction.LEFT);
-			Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-			System.out.println(robotControl.getEnv().printMatrix(matrice1));
-			getEnvironnement();
+			if(AdminControlService.status.equals("started")) {
+				robotControl.move(Direction.LEFT);
+				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
+				System.out.println(robotControl.getEnv().printMatrix(matrice1));
+				getEnvironnement();
+				return AdminControlService.status;
+			}
 			return "";
 		
 		}
@@ -130,7 +143,7 @@ public class RobotControlService {
 			RobotControlService robottest=new RobotControlService();
 			System.out.println(robottest.getEnvironnement());
 			System.out.println("-----------------------------------------------------");
-			System.out.println(robottest.goUp());
+			//System.out.println(robottest.goUp());
 			System.out.println("-----------------------------------------------------");
 			System.out.println(robottest.getEnvironnement());
 			System.out.println(robottest.goLeft());

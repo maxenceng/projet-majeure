@@ -3,6 +3,7 @@ package fct0.tests;
 import fct0.controllers.RobotCrt;
 import fct0.models.Capteur;
 import fct0.models.Env;
+import fct0.models.Measures;
 import fct0.models.Robot;
 import fct0.utils.Contenu;
 import fct0.utils.Coord;

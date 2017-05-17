@@ -1,6 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,13 +18,12 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class adminControl
  */
 @WebServlet("/adminControlService")
-public class adminControlService extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+public class AdminControlService extends HttpServlet {
+	public static String status = "stopped";
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminControlService() {
+    public AdminControlService() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +36,10 @@ public class adminControlService extends HttpServlet {
 		ServletContext app = request.getServletContext();
 		String etatSession = (String) app.getAttribute("statusCourant"); 
 		String redirectJsp = null;
-		
+	
+        //writing data to json
+        response.setContentType("application/json;charset=utf-8");
+
 
 		String submit = request.getParameter("submit");
 		switch(submit){
@@ -47,6 +53,7 @@ public class adminControlService extends HttpServlet {
 			if(etatSession=="stopped"){
 				etatSession="started";
 				app.setAttribute("statusCourant", etatSession);
+				status = etatSession;
 			}
 			redirectJsp = "admin.jsp";
 			break;		
@@ -54,6 +61,7 @@ public class adminControlService extends HttpServlet {
 			if(etatSession=="started"){
 				etatSession="stopped";
 				app.setAttribute("statusCourant", etatSession);
+				status = etatSession;
 			}
 			redirectJsp = "admin.jsp";
 			break;	

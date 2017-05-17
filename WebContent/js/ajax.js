@@ -1,10 +1,18 @@
 $(document).ready(function(){
+	
+	console.log("test")
+	
+	$.get("/adminControlService", function(data) {
+           console.log(data)
+        }
+    );
+	
   $("#myButton").click(function(){
 	  
 	  //On récupère l'état envoyé par l'admin et on test :
 	  //If a rajouter ici.
 	  
-	  	$.post("rest/cmd/UP",
+	  	$.post("rest/cmd/UP/",
     		  {},
     		  function(data,status){
     		    alert("Post Done received data: " + data + "\nStatus: " + status);
@@ -12,7 +20,7 @@ $(document).ready(function(){
   });
 
   $("#myButton3").click(function(){
-	  	$.post("rest/cmd/DOWN",
+	  	$.post("rest/cmd/DOWN/",
   		  {},
   		  function(data,status){
   		    alert("Post Done received data: " + data + "\nStatus: " + status);    
@@ -20,7 +28,7 @@ $(document).ready(function(){
 });
 
   $("#myButton4").click(function(){
-	  	$.post("rest/cmd/RIGHT",
+	  	$.post("rest/cmd/RIGHT/",
   		  {},
   		  function(data,status){
   		    alert("Post Done received data: " + data + "\nStatus: " + status);
@@ -28,7 +36,7 @@ $(document).ready(function(){
 });
 
   $("#myButton5").click(function(){
-	  	$.post("rest/cmd/LEFT",
+	  	$.post("rest/cmd/LEFT/",
   		  {},
   		  function(data,status){
   		    alert("Post Done received data: " + data + "\nStatus: " + status);
