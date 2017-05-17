@@ -23,7 +23,7 @@ public class Env {
 		tailleX=xinit;
 		tailleY=yinit;
 		pourcentageObstacle=pourcentageinit;
-		this.generateEnvironnement();
+		grille = new Grille(tailleX, tailleY);
 	}
 	
 	/**
@@ -48,6 +48,12 @@ public class Env {
 			}
 		}
 		
+	}
+	
+	@Override
+	public String toString() {
+		Contenu[][] matrice = this.grille.getMatrice();
+		return this.printMatrix(matrice);
 	}
 	
 	public Contenu findContenu(int x,int y){

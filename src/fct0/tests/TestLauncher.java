@@ -11,26 +11,25 @@ import fct0.utils.Orientation;
 
 public class TestLauncher {
 	public static void main(String[] args) {
-		Robot robot = new Robot(new Coord(3, 2), Orientation.W);
+		Robot robot = new Robot(new Coord(1, 4), Orientation.N);
 		Coord c = robot.getCoord();
-		Capteur cap = robot.getCapteur();
-		cap.updateMatrice(robot.getOrientation(), Orientation.E);
 		
-		Env env = new Env(7,7,10);
+		Env env = new Env(6,6,10);
 		RobotCrt robotCrt = new RobotCrt(env, robot);
-		Contenu[][] matrice = robotCrt.getEnv().getGrille().getMatrice();
-		System.out.println(robotCrt.getEnv().printMatrix(matrice));
-		System.out.println(robotCrt.getRobot().getCoord());
-		System.out.println("-------");
+		robotCrt.move(Direction.RIGHT);
+		System.out.println(robotCrt.getEnvRobot());
 		robotCrt.move(Direction.LEFT);
-		System.out.println(robotCrt.getRobot().getCoord());
-		System.out.println(robotCrt.getEnv().printMatrix(matrice));
-		//System.out.println(robotCrt.getRobot().getCapteur());
-		
-		System.out.println("----------------------");
+		System.out.println(robotCrt.getEnvRobot());
 		robotCrt.move(Direction.DOWN);
-		System.out.println(robotCrt.getRobot().getCoord());
-		System.out.println(robotCrt.getEnv().printMatrix(matrice));
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.DOWN);
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.DOWN);
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.LEFT);
+		System.out.println(robotCrt.getEnvRobot());
+		robotCrt.move(Direction.LEFT);
+		System.out.println(robotCrt.getEnvRobot());
 		
 	}
 }

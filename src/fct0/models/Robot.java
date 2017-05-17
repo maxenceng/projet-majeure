@@ -10,7 +10,6 @@ public class Robot {
 	private Orientation orientation;
 	private Env env;
 	private Capteur capteur;
-	private Contenu type;
 	
 	public Robot(Coord coordonnee,Orientation orientation) {
 
@@ -18,7 +17,7 @@ public class Robot {
 		this.orientation = orientation;
 		this.env = null;
 		this.capteur = new Capteur();
-		
+		this.capteur.updateMatrice(Orientation.S, orientation);
 	}
 	
 	public Coord getCoord() {

@@ -1,5 +1,8 @@
 package fct0.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fct0.models.Env;
 import fct0.models.Robot;
 import fct0.utils.Coord;
@@ -12,11 +15,13 @@ public class RobotCrt {
 	private Robot robot;
 	
 	public RobotCrt(Env env, Robot robot) {
-		this.env = env;
+		this.env = env;	
+		this.env.generateEnvironnement();
 		this.robot = robot;
-		
 	
 		env.setContenu(Contenu.ROBOT,this.robot.getCoord().getX(),this.robot.getCoord().getY());
+		this.robot.setEnv(new Env(this.env.getTailleX(), this.env.getTailleY(), 0));
+		this.updateEnvRobot();
 	}
 	
 	public void move(Direction d) {
@@ -30,6 +35,7 @@ public class RobotCrt {
 			this.robot.setCoord(new Coord(xFinal, yFinal));
 			env.setContenu(Contenu.FREE,xInit,yInit);
 			env.setContenu(Contenu.ROBOT,xFinal,yFinal);
+			this.updateEnvRobot();
 		}
 		
 	}
@@ -38,11 +44,18 @@ public class RobotCrt {
 		if(xFinal < 0 || xFinal >= this.env.getTailleX() || yFinal < 0 || yFinal >= this.env.getTailleY()) {
 			return false;
 		}
+		if(this.getEnv().findContenu(xFinal, yFinal) == Contenu.OBSTACLE || this.getEnv().findContenu(xFinal, yFinal) == Contenu.ROBOT) {
+			return false;
+		}
 		return true;
 	}
 	
 	public Integer[][] getDonneesCapteur() {
 		return this.robot.getCapteur().getMatrice();
+	}
+	
+	public int getCapteurTaille() {
+		return this.robot.getCapteur().getTaille();
 	}
 	
 	public Env getEnv() {
@@ -57,6 +70,44 @@ public class RobotCrt {
 		return this.robot;
 	}
 	
+	
+	private Coord getPositionRobotMatrice() {
+		Integer[][] data = this.getDonneesCapteur();
+		for(int i = 0; i < this.getCapteurTaille(); i++) {
+			for(int j = 0; j < this.getCapteurTaille(); j++) {
+				if(data[i][j] == 2) {
+					return new Coord(i, j);
+				}
+			}
+		}
+		return null;
+	}
+	
+	private List<Coord> getPositionsADecouvrirMatrice() {
+		List<Coord> list = new ArrayList<Coord>();
+		Integer[][] data = this.getDonneesCapteur();
+		Coord posRobot = this.getPositionRobotMatrice();
+		for(int i = 0; i < this.getCapteurTaille(); i++) {
+			for(int j = 0; j < this.getCapteurTaille(); j++) {
+				if(data[i][j] == 1) {
+					list.add(new Coord(posRobot.getX() - i, posRobot.getY() -j));
+				}
+			}
+		}
+		return list;
+	}
+	
+	public void updateEnvRobot() {
+		int x = this.robot.getCoord().getX();
+		int y = this.robot.getCoord().getY();
+		for(Coord c : this.getPositionsADecouvrirMatrice()) {
+			Contenu cont = this.env.findContenu(x + c.getX(), y + c.getY());
+			if(cont != null)  {
+				this.getEnvRobot().setContenu(cont, x + c.getX(), y + c.getY());
+			}
+		}
+		this.getEnvRobot().setContenu(Contenu.ROBOT, x, y);
+	}
 	
 
 }

@@ -12,6 +12,7 @@ public class EnvTest {
 	@Test
 	public void testFindContenu() {
 		Env env = new Env(14, 15, 50);
+		env.generateEnvironnement();
 		assertEquals((env.findContenu(14, 15) == null), true);
 		assertEquals((env.findContenu(-1, 10) == null), true);
 		assertEquals((env.findContenu(10, -1) == null), true);
