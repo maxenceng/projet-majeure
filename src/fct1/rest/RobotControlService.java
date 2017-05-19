@@ -1,4 +1,4 @@
-package fct1.com.rest.services;
+package fct1.rest;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -13,7 +13,8 @@ import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import servlet.AdminControlService;
+import utils.AppelRobot;
+import utils.AppelStatus;
 import fct0.controllers.RobotCrt;
 import fct0.models.Env;
 import fct0.models.Robot;
@@ -21,7 +22,7 @@ import fct0.utils.Coord;
 import fct0.utils.Orientation;
 import fct0.utils.Direction;
 import fct0.utils.Contenu;
-import fct1.com.rest.services.AppelRobot;
+import fct1.controllers.AdminControlService;
 
 
 @Path("/cmd")
@@ -39,12 +40,12 @@ public class RobotControlService {
 		@Path("UP")
 		public String goUp(@PathParam("status")String status)
 		{
-			if(AdminControlService.status.equals("started")) {
+			if(AppelStatus.getStatus().equals("started")) {
 				robotControl.move(Direction.UP);
 				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
 				System.out.println(robotControl.getEnv().printMatrix(matrice1));
 				getEnvironnement();
-				return AdminControlService.status;
+				return AppelStatus.getStatus();
 			}
 			return "";
 		}
@@ -54,12 +55,12 @@ public class RobotControlService {
 		@Path("DOWN")
 		public String goDown()
 		{
-			if(AdminControlService.status.equals("started")) {
+			if(AppelStatus.getStatus().equals("started")) {
 				robotControl.move(Direction.DOWN);
 				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
 				System.out.println(robotControl.getEnv().printMatrix(matrice1));
 				getEnvironnement();
-				return AdminControlService.status;
+				return AppelStatus.getStatus();
 			}
 			return "";
 		}
@@ -69,12 +70,12 @@ public class RobotControlService {
 		@Path("RIGHT")
 		public String goRight()
 		{
-			if(AdminControlService.status.equals("started")) {
+			if(AppelStatus.getStatus().equals("started")) {
 				robotControl.move(Direction.RIGHT);
 				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
 				System.out.println(robotControl.getEnv().printMatrix(matrice1));
 				getEnvironnement();
-				return AdminControlService.status;
+				return AppelStatus.getStatus();
 			}
 			return "";
 		}
@@ -84,12 +85,12 @@ public class RobotControlService {
 		@Path("LEFT")
 		public String goLeft()
 		{
-			if(AdminControlService.status.equals("started")) {
+			if(AppelStatus.getStatus().equals("started")) {
 				robotControl.move(Direction.LEFT);
 				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
 				System.out.println(robotControl.getEnv().printMatrix(matrice1));
 				getEnvironnement();
-				return AdminControlService.status;
+				return AppelStatus.getStatus();
 			}
 			return "";
 		

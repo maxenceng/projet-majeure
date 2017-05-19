@@ -1,12 +1,4 @@
-$(document).ready(function(){
-	
-	console.log("test")
-	
-	$.get("/adminControlService", function(data) {
-           console.log(data)
-        }
-    );
-	
+$(document).ready(function(){	
   $("#myButton").click(function(){
 	  
 	  //On récupère l'état envoyé par l'admin et on test :

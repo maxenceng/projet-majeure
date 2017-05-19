@@ -1,4 +1,4 @@
-package model;
+package fct1.models;
 
 public class AdminModel {
 

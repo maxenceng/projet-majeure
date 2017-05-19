@@ -1,4 +1,4 @@
-package servlet;
+package fct1.controllers;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AdminModel;
 import db.DB;
+import fct1.models.AdminModel;
 
 
 /**

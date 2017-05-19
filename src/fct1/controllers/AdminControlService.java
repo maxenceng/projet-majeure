@@ -1,10 +1,12 @@
-package servlet;
+package fct1.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import utils.AppelStatus;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,7 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/adminControlService")
 public class AdminControlService extends HttpServlet {
-	public static String status = "stopped";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,7 +54,7 @@ public class AdminControlService extends HttpServlet {
 			if(etatSession=="stopped"){
 				etatSession="started";
 				app.setAttribute("statusCourant", etatSession);
-				status = etatSession;
+				AppelStatus.setStatus(etatSession);
 			}
 			redirectJsp = "admin.jsp";
 			break;		
@@ -61,7 +62,7 @@ public class AdminControlService extends HttpServlet {
 			if(etatSession=="started"){
 				etatSession="stopped";
 				app.setAttribute("statusCourant", etatSession);
-				status = etatSession;
+				AppelStatus.setStatus(etatSession);
 			}
 			redirectJsp = "admin.jsp";
 			break;	

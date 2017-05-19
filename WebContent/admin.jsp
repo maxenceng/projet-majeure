@@ -20,11 +20,6 @@
 			application.setAttribute("statusCourant", "stopped");
 		}
 	%>
-	
-		
-		${statusCourant}
-		
-		Welcome ${username}
 		<form action="adminControlService">
 		<input type="submit" NAME="submit" value="started">
 		<input type="submit" NAME="submit" value="stopped">

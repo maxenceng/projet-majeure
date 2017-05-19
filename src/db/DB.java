@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.AdminModel;
+
+import fct1.models.AdminModel;
 
 public class DB {
 	private static final String DB_HOST="db-tp.cpe.fr";
