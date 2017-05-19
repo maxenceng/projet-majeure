@@ -46,8 +46,7 @@ public class RobotCrtTest {
 		
 		Direction d = Direction.RIGHT;
 		copieCoord = robotCrt.getRobot().getCoord();
-		if(robotCrt.isMoveOk(robotCrt.getRobot().getCoord().getX() + d.x, robotCrt.getRobot().getCoord().getY() + d.y)) {
-			robotCrt.move(d);
+		if(robotCrt.move(d)) {
 			assertNotEquals(robotCrt.getRobot().getCoord(), copieCoord);
 		} else {
 			assertEquals(robotCrt.getRobot().getCoord(), copieCoord);
@@ -56,8 +55,7 @@ public class RobotCrtTest {
 		
 		d = Direction.LEFT;
 		copieCoord = robotCrt.getRobot().getCoord();
-		if(robotCrt.isMoveOk(robotCrt.getRobot().getCoord().getX() + d.x, robotCrt.getRobot().getCoord().getY() + d.y)) {
-			robotCrt.move(d);
+		if(robotCrt.move(d)) {
 			assertNotEquals(robotCrt.getRobot().getCoord(), copieCoord);
 		} else {
 			assertEquals(robotCrt.getRobot().getCoord(), copieCoord);
@@ -66,8 +64,7 @@ public class RobotCrtTest {
 		
 		d = Direction.UP;
 		copieCoord = robotCrt.getRobot().getCoord();
-		if(robotCrt.isMoveOk(robotCrt.getRobot().getCoord().getX() + d.x, robotCrt.getRobot().getCoord().getY() + d.y)) {
-			robotCrt.move(d);
+		if(robotCrt.move(d)) {
 			assertNotEquals(robotCrt.getRobot().getCoord(), copieCoord);
 		} else {
 			assertEquals(robotCrt.getRobot().getCoord(), copieCoord);
@@ -76,8 +73,7 @@ public class RobotCrtTest {
 		
 		d = Direction.DOWN;
 		copieCoord = robotCrt.getRobot().getCoord();
-		if(robotCrt.isMoveOk(robotCrt.getRobot().getCoord().getX() + d.x, robotCrt.getRobot().getCoord().getY() + d.y)) {
-			robotCrt.move(d);
+		if(robotCrt.move(d)) {
 			assertNotEquals(robotCrt.getRobot().getCoord(), copieCoord);
 		} else {
 			assertEquals(robotCrt.getRobot().getCoord(), copieCoord);

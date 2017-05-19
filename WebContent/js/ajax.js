@@ -51,6 +51,13 @@ $(document).ready(function(){
 	  		}
 	  		
   		    alert("Get Done received data: " + data + "\nStatus: " + status);
-  	});    
+  	});     
 });
+  
+  $("#myButton6").click(function(){
+	  	$.get("rest/cmd/measures",
+		  function(data,status){
+			console.log(data)
+	  	})
+	});  
 });

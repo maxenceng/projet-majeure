@@ -38,20 +38,22 @@ public class AdminControlService extends HttpServlet {
 		String etatSession = (String) app.getAttribute("statusCourant"); 
 		String redirectJsp = null;
 	
-        //writing data to json
-        response.setContentType("application/json;charset=utf-8");
-
-
 		String submit = request.getParameter("submit");
+		HttpSession session = request.getSession(true);
+		
 		switch(submit){
 		case "logout":
-			HttpSession session = request.getSession(true);
+			if(etatSession.equals("started") && session.getAttribute("username").equals(AppelStatus.getUser())){
+				app.setAttribute("statusCourant", "stopped");
+				AppelStatus.setStatus("stopped");
+			}
 			session.removeAttribute("username");
 			session.invalidate();
 			redirectJsp = "login.jsp";
 			break;
 		case "started":
-			if(etatSession=="stopped"){
+			if(etatSession.equals("stopped")){
+				AppelStatus.setUser((String) session.getAttribute("username"));
 				etatSession="started";
 				app.setAttribute("statusCourant", etatSession);
 				AppelStatus.setStatus(etatSession);
@@ -59,7 +61,7 @@ public class AdminControlService extends HttpServlet {
 			redirectJsp = "admin.jsp";
 			break;		
 		case "stopped":
-			if(etatSession=="started"){
+			if(etatSession.equals("started") && session.getAttribute("username").equals(AppelStatus.getUser())){
 				etatSession="stopped";
 				app.setAttribute("statusCourant", etatSession);
 				AppelStatus.setStatus(etatSession);

@@ -2,6 +2,7 @@ package utils;
 
 public class AppelStatus {
 	private static String status;
+	private static String user;
 
 	
 	public static String getStatus(){
@@ -13,7 +14,18 @@ public class AppelStatus {
 		return status;
 	}
 	
+	public static String getUser() {
+		if(user == null) {
+			user = "";
+		}
+		return user;
+	}
+	
 	public static void setStatus(String s) {
 		status = s;
+	}
+	
+	public static void setUser(String u) {
+		user = u;
 	}
 }

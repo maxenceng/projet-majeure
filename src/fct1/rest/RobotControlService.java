@@ -2,6 +2,8 @@ package fct1.rest;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,6 +19,7 @@ import utils.AppelRobot;
 import utils.AppelStatus;
 import fct0.controllers.RobotCrt;
 import fct0.models.Env;
+import fct0.models.Measures;
 import fct0.models.Robot;
 import fct0.utils.Coord;
 import fct0.utils.Orientation;
@@ -31,7 +34,8 @@ public class RobotControlService {
 	//Inject servlet context (needed to get general context, application memory space, session memory space ...)
 	@Context
 	ServletContext context;
-	
+	@Context
+	private HttpServletRequest request;
 
 		RobotCrt robotControl =AppelRobot.getAppelRobot();
 	
@@ -40,14 +44,14 @@ public class RobotControlService {
 		@Path("UP")
 		public String goUp(@PathParam("status")String status)
 		{
-			if(AppelStatus.getStatus().equals("started")) {
-				robotControl.move(Direction.UP);
-				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-				System.out.println(robotControl.getEnv().printMatrix(matrice1));
-				getEnvironnement();
-				return AppelStatus.getStatus();
+			String userApp = AppelStatus.getUser();
+			String userSession = (String) request.getSession().getAttribute("username");
+			if(AppelStatus.getStatus().equals("started") && userApp.equals(userSession)) {
+				if(robotControl.move(Direction.UP)) {
+					return "OK";
+				}
 			}
-			return "";
+			return "KO";
 		}
 		
 		@POST
@@ -55,14 +59,14 @@ public class RobotControlService {
 		@Path("DOWN")
 		public String goDown()
 		{
-			if(AppelStatus.getStatus().equals("started")) {
-				robotControl.move(Direction.DOWN);
-				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-				System.out.println(robotControl.getEnv().printMatrix(matrice1));
-				getEnvironnement();
-				return AppelStatus.getStatus();
+			String userApp = AppelStatus.getUser();
+			String userSession = (String) request.getSession().getAttribute("username");
+			if(AppelStatus.getStatus().equals("started") && userApp.equals(userSession)) {
+				if(robotControl.move(Direction.DOWN)) {
+					return "OK";					
+				}
 			}
-			return "";
+			return "KO";
 		}
 		
 		@POST
@@ -70,14 +74,13 @@ public class RobotControlService {
 		@Path("RIGHT")
 		public String goRight()
 		{
-			if(AppelStatus.getStatus().equals("started")) {
+			String userApp = AppelStatus.getUser();
+			String userSession = (String) request.getSession().getAttribute("username");
+			if(AppelStatus.getStatus().equals("started") && userApp.equals(userSession)) {
 				robotControl.move(Direction.RIGHT);
-				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-				System.out.println(robotControl.getEnv().printMatrix(matrice1));
-				getEnvironnement();
-				return AppelStatus.getStatus();
+				return "OK";
 			}
-			return "";
+			return "KO";
 		}
 		
 		@POST
@@ -85,15 +88,38 @@ public class RobotControlService {
 		@Path("LEFT")
 		public String goLeft()
 		{
-			if(AppelStatus.getStatus().equals("started")) {
-				robotControl.move(Direction.LEFT);
-				Contenu[][] matrice1=robotControl.getEnv().getGrille().getMatrice();
-				System.out.println(robotControl.getEnv().printMatrix(matrice1));
-				getEnvironnement();
-				return AppelStatus.getStatus();
+			String userApp = AppelStatus.getUser();
+			String userSession = (String) request.getSession().getAttribute("username");
+			if(AppelStatus.getStatus().equals("started") && userApp.equals(userSession)) {
+				if(robotControl.move(Direction.LEFT)) {
+					return "OK";
+				}				
 			}
-			return "";
+			return "KO";		
+		}
 		
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("status")
+		public String getStatus()
+		{
+			JSONObject obj = new JSONObject();
+			obj.put("status", AppelStatus.getStatus());
+			obj.put("user", AppelStatus.getUser());
+			return obj.toJSONString();
+		}
+		
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("measures")
+		public String getMeasures()
+		{
+			JSONObject obj = new JSONObject();
+			obj.put("nbreCommande", Measures.getNbreCommande());
+			obj.put("distanceParcourue", Measures.getDistanceParcourue());
+			obj.put("nbreObstRencontres", Measures.getNbreObstRencontres());
+			obj.put("nbreObstVisible",  Measures.getNbreObstVisible());
+			return obj.toJSONString();
 		}
 		
 		
@@ -139,16 +165,5 @@ public class RobotControlService {
 			return objContainer.toJSONString();
 
 	
-		}
-		public static void main(String[] args){
-			RobotControlService robottest=new RobotControlService();
-			System.out.println(robottest.getEnvironnement());
-			System.out.println("-----------------------------------------------------");
-			//System.out.println(robottest.goUp());
-			System.out.println("-----------------------------------------------------");
-			System.out.println(robottest.getEnvironnement());
-			System.out.println(robottest.goLeft());
-			System.out.println("-----------------------------------------------------");
-			System.out.println(robottest.getEnvironnement());
 		}
 }

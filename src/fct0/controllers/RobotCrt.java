@@ -24,7 +24,7 @@ public class RobotCrt {
 		this.updateEnvRobot();
 	}
 	
-	public void move(Direction d) {
+	public boolean move(Direction d) {
 		Measures.incrementNbreCommande();
 		int xInit=this.robot.getCoord().getX();
 		int xFinal = xInit + d.x; 
@@ -38,7 +38,9 @@ public class RobotCrt {
 			env.setContenu(Contenu.ROBOT,xFinal,yFinal);
 			this.updateEnvRobot();
 			Measures.incrementDistanceParcourue();
+			return true;
 		}
+		return false;
 		
 	}
 	
