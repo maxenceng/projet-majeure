@@ -1,0 +1,60 @@
+.header  {
+        height: 120px;
+        background: #4c6ea5;
+		text-align:center;
+ }
+ 
+#entete{
+  padding-top:2%;
+  font-size:200%;
+  font-family: 'Alfa Slab One', cursive;
+  color: white;
+}
+
+#spin{
+  float:right;
+  margin-right:0%;
+  margin-bottom:10%;
+  color:white;
+
+}
+#running{
+  font-family: 'Alfa Slab One', cursive;
+  font-size:140%;
+  float:right;
+  margin-right:2%;
+  color: white;
+}
+
+#myButton
+{
+  position:absolute;
+  right: 50%;
+  bottom:22%;
+  color: #203960;
+}
+
+
+#myButton5
+{
+  position:absolute;
+  right: 55%;
+  bottom:15%;
+  color: #203960;
+}
+
+#myButton4
+{
+  position:absolute;
+  right: 45%;
+  bottom:15%;
+  color: #203960;
+}
+
+#myButton3
+{
+  position:absolute;
+  right: 50%;
+  bottom: 7%;
+  color: #203960;
+}
