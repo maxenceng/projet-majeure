@@ -1,0 +1,69 @@
+#monForm {
+   position:absolute;
+   top:50%;
+   left:50%;
+   width:350px; /* A toi de donner la bonne largeur */
+   height:300px; /* A toi de donner la bonne hauteur */
+   margin-left:-150px; /* -largeur/2 */
+   margin-top:-200px; /* -hauteur/2 */
+   background:black;
+   border-radius: 10px;
+   
+}
+
+label
+{
+  color:white;
+  display: block;
+  width: 28%;
+  float: left;
+}
+
+
+
+.myButton {
+	background-color:#44c767;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:10px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+	background-color:#5cbf2a;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+  
+.myButton1 {
+	background-color:#44c767;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:10px 47px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	 margin-left:20px;
+}
+.myButton1:hover {
+	background-color:#5cbf2a;
+}
+.myButton1:active {
+	position:relative;
+	top:1px;
+}

@@ -1,8 +1,15 @@
+
+body{
+	display:flex;
+
+}
+
 .header  {
         height: 120px;
         background: #4c6ea5;
 		text-align:center;
  }
+ 
  
 #entete{
   padding-top:2%;
@@ -18,6 +25,20 @@
   color:white;
 
 }
+
+#fleche{
+
+}
+
+
+.container{
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: auto;
+  grid-template-areas: "header header header header"
+                       "main main sidebar sidebar"
+}        
+
+
 #running{
   font-family: 'Alfa Slab One', cursive;
   font-size:140%;
