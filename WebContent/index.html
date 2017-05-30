@@ -2,9 +2,25 @@
 <html>
 <meta charset="UTF-8" />
 <title>test</title>
+<style>
+  #stage {
+    width: 480px;
+    height: 256px;
+    position: relative;
+    border: 2px solid black
+  }
+  div#stage canvas { position: absolute; }
+  #robot { z-index: 3 }
+  #traj { z-index: 2 }
+  #carte { z-index: 1 }
+</style>
 <body>
   <div class="container">
-    <div id="carte"><canvas id="carte" width="800" height="600"></canvas></div>
+  <div id="stage">
+<canvas id="traj" height="256px" width="480px"> </canvas>
+<canvas id="robot" height="256px" width="480px"> </canvas>
+<canvas id="carte" height="256px" width="480px"> </canvas>
+</div>
     <div id="fleches">
       <div><button id="btnUp">UP</button></div>
       <div>

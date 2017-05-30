@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9c3a8a2d8cc730b6ac5f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8527789837eafeacd1f1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -742,85 +742,179 @@ var nbreObstRencontres = [];
 var nbreObstVisible = [];
 
 var data = {
-  labels: labels,
-  datasets: [{
-    fill: false,
-    lineTension: 0,
-    backgroundColor: 'rgba(75,192,192,0.4)',
-    borderColor: 'rgba(75,192,192,1)',
-    data: []
-  }]
+	labels: labels,
+	datasets: [{
+		fill: false,
+		lineTension: 0,
+		backgroundColor: 'rgba(75,192,192,0.4)',
+		borderColor: 'rgba(75,192,192,1)',
+		data: []
+	}]
 };
 var options = {
-  responsive: false,
-  maintainAspectRatio: false,
-  legend: {
-    display: false
-  }
+	responsive: false,
+	maintainAspectRatio: false,
+	legend: {
+		display: false
+	}
 };
 
 var content = {
-  type: 'line',
-  data: data,
-  options: options
+	type: 'line',
+	data: data,
+	options: options
 };
 
 var lineChart1 = new _chart2.default(chart1, content);
 var lineChart2 = new _chart2.default(chart2, content);
 var lineChart3 = new _chart2.default(chart3, content);
 
-var i = 0;
-setInterval(test, 1000); /* SCRIPT A DECOMMENTER EN DEHORS DE LA VM */
+var j = 0;
+setInterval(test, 1000);
 
 function test() {
-  labels.push(i);
-  i++;
-  _axios2.default.get('rest/cmd/measures').then(function (response) {
-    nbreCommande.push(response.data.nbreCommande);
-    distanceParcourue.push(response.data.distanceParcourue);
-    nbreObstRencontres.push(response.data.nbreObstRencontres);
-    nbreObstVisible.push(response.data.nbreObstVisible);
-    lineChart1.data.labels = labels;
-    lineChart1.data.datasets[0].data = nbreCommande;
-    lineChart1.update();
-    lineChart2.data.labels = labels;
-    lineChart2.data.datasets[0].data = distanceParcourue;
-    lineChart2.update();
-    lineChart3.data.labels = labels;
-    lineChart3.data.datasets[0].data = nbreObstVisible;
-    lineChart3.update();
-  });
+	labels.push(j);
+	j++;
+	_axios2.default.get('rest/cmd/measures').then(function (response) {
+		nbreCommande.push(response.data.nbreCommande);
+		distanceParcourue.push(response.data.distanceParcourue);
+		nbreObstRencontres.push(response.data.nbreObstRencontres);
+		nbreObstVisible.push(response.data.nbreObstVisible);
+		lineChart1.data.labels = labels;
+		lineChart1.data.datasets[0].data = nbreCommande;
+		lineChart1.update();
+		lineChart2.data.labels = labels;
+		lineChart2.data.datasets[0].data = distanceParcourue;
+		lineChart2.update();
+		lineChart3.data.labels = labels;
+		lineChart3.data.datasets[0].data = nbreObstVisible;
+		lineChart3.update();
+	});
 }
 
-if (path === '/refresh-button.html') {
-  document.querySelector('#refreshBtn').addEventListener('click', function () {
-    alert('REFRESH');
-  });
+// PARTIE CARTE
+
+var canvas = document.getElementById('carte');
+var map = canvas.getContext('2d');
+
+var canvas1 = document.getElementById('traj');
+var traj = canvas1.getContext('2d');
+
+var canvas2 = document.getElementById('robot');
+var rob = canvas2.getContext('2d');
+
+var mapArray = [[0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+var grass = new Image();
+var stone = new Image();
+var robot = new Image();
+
+grass.src = 'grass.png';
+stone.src = 'stone.png';
+robot.src = 'robot.png';
+
+var posX = 0;
+var posY = 0;
+var deltaX = 0;
+var deltaY = 0;
+var tabTraj = [];
+var keys = {};
+
+var drawMap = function drawMap() {
+	for (var i = 0; i < mapArray.length; i++) {
+		for (var j = 0; j < mapArray[i].length; j++) {
+			if (mapArray[i][j] == 0) {
+				map.drawImage(grass, posX, posY, 32, 32);
+			}
+			if (mapArray[i][j] == 1) {
+				map.drawImage(stone, posX, posY, 32, 32);
+			}
+			posX += 32;
+		}
+		posX = 0;
+		posY += 32;
+	}
+	posY = 0;
+};
+
+function drawRobTraj() {
+	rob.clearRect(0, 0, canvas.width, canvas.height);
+	rob.drawImage(robot, deltaX, deltaY, 32, 32);
+	drawTraj();
+};
+
+function drawTraj() {
+	for (var i = 1; i < tabTraj.length; i++) {
+		traj.beginPath();
+		traj.moveTo(tabTraj[i - 1][0] + 16, tabTraj[i - 1][1] + 16, 5, 5);
+		traj.lineTo(tabTraj[i][0] + 16, tabTraj[i][1] + 16, 5, 5);
+		traj.stroke();
+		//traj.fillRect(tabTraj[i][0]+16,tabTraj[i][1]+16,10,10);
+	}
 }
+
+drawMap();
 
 // A remplacer par les requetes AJAX
 document.querySelector('#btnUp').addEventListener('click', function () {
-  _axios2.default.post('rest/cmd/UP', {}).then(function (response) {
-    console.log(response);
-  });
+	_axios2.default.post('rest/cmd/UP', {}).then(function (response) {
+		console.log(response.data);
+		if (response.data === 'OK') {
+			deltaY -= 32;
+			if (deltaY < 0) {
+				deltaY = 0;
+			}
+			tabTraj.push([deltaX, deltaY]);
+			drawRobTraj();
+		}
+	});
 });
 
 document.querySelector('#btnLeft').addEventListener('click', function () {
-  _axios2.default.post('rest/cmd/LEFT', {}).then(function (response) {
-    console.log(response);
-  });
+	_axios2.default.post('rest/cmd/LEFT', {}).then(function (response) {
+		console.log(response);
+		if (response.data === 'OK') {
+			deltaX -= 32;
+			if (deltaX < 0) {
+				deltaX = 0;
+			}
+			tabTraj.push([deltaX, deltaY]);
+			drawRobTraj();
+		}
+	});
 });
 
 document.querySelector('#btnRight').addEventListener('click', function () {
-  _axios2.default.post('rest/cmd/RIGHT', {}).then(function (response) {
-    console.log(response);
-  });
+	_axios2.default.post('rest/cmd/RIGHT', {}).then(function (response) {
+		console.log(response);
+		if (response.data === 'OK') {
+			deltaX += 32;
+			if (deltaX > canvas.width - 32) {
+				deltaX = canvas.width - 32;
+			}
+			tabTraj.push([deltaX, deltaY]);
+			drawRobTraj();
+		}
+	});
 });
 
 document.querySelector('#btnDown').addEventListener('click', function () {
-  _axios2.default.post('rest/cmd/DOWN', {}).then(function (response) {
-    console.log(response);
-  });
+	_axios2.default.post('rest/cmd/DOWN', {}).then(function (response) {
+		console.log(response);
+		if (response.data === 'OK') {
+			deltaY += 32;
+			if (deltaY > canvas.height - 32) {
+				deltaY = canvas.height - 32;
+			}
+			tabTraj.push([deltaX, deltaY]);
+			drawRobTraj();
+		}
+	});
+});
+
+// RECUP DONNEES CARTE
+_axios2.default.get('rest/cmd/env').then(function (response) {
+	console.log(response);
 });
 
 /***/ }),
@@ -16874,7 +16968,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "#carte {\n  background-color: green; }\n\n#fleches {\n  background-color: red;\n  text-align: center; }\n\n#graphes,\n#data {\n  background-color: blue; }\n\n#data {\n  min-width: 200px; }\n\nbody {\n  display: flex; }\n  body canvas {\n    margin-bottom: 1em; }\n", ""]);
+exports.push([module.i, "#fleches {\n  background-color: red;\n  text-align: center; }\n\n#graphes,\n#data {\n  background-color: blue; }\n\n#data {\n  min-width: 200px; }\n\nbody {\n  display: flex; }\n  body canvas {\n    margin-bottom: 1em; }\n", ""]);
 
 // exports
 
