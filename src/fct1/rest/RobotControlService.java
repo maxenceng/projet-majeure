@@ -146,7 +146,7 @@ public class RobotControlService {
 			
 					JSONObject objVal1 = new JSONObject();
 					currentContenu=robotControl.getEnvRobot().getGrille().getContenuG(x,y);		
-					objVal1.put("état",currentContenu.toString());
+					objVal1.put("etat",currentContenu.toString());
 					//list.add(objVal1);
 					objVal1.put("x",x);
 					//list.add(objVal1);	

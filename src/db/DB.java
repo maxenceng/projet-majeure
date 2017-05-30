@@ -12,18 +12,28 @@ import java.util.ArrayList;
 import fct1.models.AdminModel;
 
 public class DB {
+	// Dev Ecole
+	/*
 	private static final String DB_HOST="db-tp.cpe.fr";
 	private static final String DB_PORT="3306";
 	private static final String DB_NAME="binome13";
 	private static final String DB_USER="binome13";
 	private static final String DB_PWD="binome13";
+	*/
+	// Dev Maison
+	private static final String DB_HOST="localhost";
+	private static final String DB_NAME="javadev";
+	private static final String DB_USER="root";
+	private static final String DB_PWD="root";
 	private Connection connection;
 	
 	public DB() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			
-			this.connection = DriverManager.getConnection("jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME, DB_USER, DB_PWD);
+			// Dev Ecole
+			// this.connection = DriverManager.getConnection("jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME, DB_USER, DB_PWD);
+			// Dev Maison
+			this.connection = DriverManager.getConnection("jdbc:mysql://" + DB_HOST + "/" + DB_NAME, DB_USER, DB_PWD);
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} catch(ClassNotFoundException e) {
