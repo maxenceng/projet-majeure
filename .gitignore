@@ -1,3 +1,4 @@
 bin
 WebContent/fct2/node_modules
 build
+WebContent/fct2/dist

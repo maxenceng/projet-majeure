@@ -1,12 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const htmlWebpackPlugin = require('html-webpack-plugin')
-
-const htmlWebpackPluginConfig = new htmlWebpackPlugin({
-  template: './app/html/refresh-auto.html',
-  filename: 'refresh-auto.html',
-  inject: 'body'
-})
 
 
 module.exports = {
@@ -31,7 +24,6 @@ module.exports = {
    * Plugins pour permettre d'utiliser le HMR (Hot Module Replacement)
    */
   plugins: [
-    htmlWebpackPluginConfig,
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
