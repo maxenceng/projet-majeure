@@ -1,53 +1,56 @@
-
-body{
+body	{
 	display:flex;
 	flex-wrap:wrap;
 	align-content:flex-start;
 }
 
+
+
+
 header  {
-        height: 120px;
+		display:flex;
+        height: 8em;
         width: 100%;
         background: #4c6ea5;
 		text-align:center;
- }
- 
- #canvas{
- 	background: #d87bcc;
- 	width:70%;
+		font-family: 'Alfa Slab One', cursive;
+  		color: white;
 
  }
- #data{
- 		height: 250px;
- 		width: 30%;
- 	   background: #7fbc69;
+ #tete{
+ 	 margin-left:40%;
+ 	 font-size:20px;
+ }
+
+ 
+ #canvas	{
+ 	display:flex;
+ 	background: #d87bcc;
+ 	width:75%;
+ 	height:45.5em;
+
+ }
+ #data	{
+ 	display:flex;
+ 	width: 25%;
+ 	height:45.5em;
+ 	background: #7fbc69;
+
  }
  
-.fleche{
+#fleche	{
  	background: #a8b7a3;
- 	width: 70%;
+ 	width: 100%;
+ 	height: 15em;
+ 	text-align:center;
  	
  }
  
- #myButton
-{
-  color: #203960;
+#flechegauche{
+	margin-left:0%;
+
+}
+#flechedroite{
+	margin-left:5%;
 }
 
-
-#myButton5
-{
-  color: #203960;
-}
-
-#myButton4
-{
-
-  color: #203960;
-}
-
-#myButton3
-{
-
-  color: #203960;
-}

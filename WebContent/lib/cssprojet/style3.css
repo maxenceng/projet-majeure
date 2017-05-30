@@ -35,8 +35,8 @@
 }
 
 .bouton17 {
-	width:250px;
-	height:250px;
+	width:25%;
+	height:10em;
 	background:#fafafa;
 	box-shadow:2px 2px 8px #aaa;
 	font:bold 30px Arial;
@@ -45,14 +45,14 @@
 	margin-left:29%;
 }
 .bouton18 {
-	width:250px;
-	height:250px;
+	width:25%;
+	height:10em;
 	background:#cc0000;
 	font:bold 30px Arial;
 	border-radius:50%;
 	border:none;
 	color:#fff;
-	margin-left:7%;
+	margin-left:9%;
 }
 
 .bouton13 {
