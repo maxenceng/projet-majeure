@@ -8,22 +8,7 @@ const traj = canvas1.getContext('2d')
 
 const canvas2 = document.getElementById('robot')
 const rob = canvas2.getContext('2d')
-/*
-// RECUP DONNEES CARTE
-axios.get('rest/cmd/env').then((response) => {
-  console.log(response)
-})
-*/
-const mapArray = [
-  [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
+
 
 const grass = new Image()
 const stone = new Image()
@@ -41,6 +26,62 @@ let deltaY = 0
 const tabTraj = []
 let posRobotX
 let posRobotY
+
+let mapData = []
+
+// RECUP DONNEES CARTE
+export const drawMapFinal = () => {
+	  for (let i = 0; i < mapData.length; i += 1) {
+	    for (let j = 0; j < mapData[i].length; j += 1) {
+	      if (mapData[i][j] === "FREE") {
+	        map.drawImage(grass, posX, posY, 32, 32)
+	      }
+	      if (mapData[i][j] === "OBSTACLE") {
+	        map.drawImage(stone, posX, posY, 32, 32)
+	      }
+	      if (mapData[i][j] === "ROBOT") {
+	        map.drawImage(grass, posX, posY, 32, 32)
+	        posRobotX = posX
+	        posRobotY = posY
+	        rob.drawImage(robot, posRobotX, posRobotY, 32, 32)
+	      }
+	      posX += 32
+	    }
+	    posX = 0
+	    posY += 32
+	  }
+	  posY = 0
+}
+
+
+export const test = () => {
+	axios.get('rest/cmd/env').then((response) => {
+		  let data = response.data.donnees
+		  let length = data.length
+		  for (let i = 0; i < Math.sqrt(length); i += 1) {
+			  mapData.push(data.splice(0, 9))
+		  }
+		  for (let i = 0; i < mapData.length; i += 1) {
+			  for (let j = 0; j < mapData[i].length; j += 1) {
+				  mapData[i][j] = mapData[i][j].etat
+			  }
+		  }
+		  drawMapFinal()
+		})
+}
+
+const mapArray = [
+  [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]
+
+
 export const drawMap = () => {
   for (let i = 0; i < mapArray.length; i += 1) {
     for (let j = 0; j < mapArray[i].length; j += 1) {
@@ -63,6 +104,8 @@ export const drawMap = () => {
   }
   posY = 0
 }
+
+
 
 const drawTraj = () => {
   for (let i = 1; i < tabTraj.length; i += 1) {

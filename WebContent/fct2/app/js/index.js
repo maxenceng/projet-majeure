@@ -2,13 +2,13 @@ import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
 import sass from '../sass/index.sass'
 import chartes from './modules/chartes'
-import { move, drawMap } from './modules/carte'
+import { move, test, drawMapFinal } from './modules/carte'
 
-setInterval(chartes(), 5000)
+setInterval(chartes(), 1)
 
 // PARTIE CARTE
 
-drawMap()
+test()
 
 document.querySelector('#btnUp').addEventListener('click', () => {
   axios.post('rest/cmd/UP', {}).then((response) => {

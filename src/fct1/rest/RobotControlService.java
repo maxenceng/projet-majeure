@@ -77,8 +77,9 @@ public class RobotControlService {
 			String userApp = AppelStatus.getUser();
 			String userSession = (String) request.getSession().getAttribute("username");
 			if(AppelStatus.getStatus().equals("started") && userApp.equals(userSession)) {
-				robotControl.move(Direction.RIGHT);
-				return "OK";
+				if(robotControl.move(Direction.RIGHT)) {
+					return "OK";					
+				}
 			}
 			return "KO";
 		}
@@ -145,7 +146,7 @@ public class RobotControlService {
 				{
 			
 					JSONObject objVal1 = new JSONObject();
-					currentContenu=robotControl.getEnvRobot().getGrille().getContenuG(x,y);		
+					currentContenu=robotControl.getEnv().getGrille().getContenuG(x,y);		
 					objVal1.put("etat",currentContenu.toString());
 					//list.add(objVal1);
 					objVal1.put("x",x);

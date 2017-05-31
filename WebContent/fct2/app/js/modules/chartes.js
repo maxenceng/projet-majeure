@@ -6,13 +6,13 @@ const chart1 = document.querySelector('#myChart1')
 const chart2 = document.querySelector('#myChart2')
 const chart3 = document.querySelector('#myChart3')
 
-const labels = []
-const nbreCommande = []
-const distanceParcourue = []
-const nbreObstRencontres = []
-const nbreObstVisible = []
+let labels = []
+let nbreCommande = []
+let distanceParcourue = []
+let nbreObstRencontres = []
+let nbreObstVisible = []
 
-const data = {
+let data = {
   labels,
   datasets: [
     {
@@ -32,20 +32,21 @@ const options = {
   },
 }
 
-const content = {
+let content = {
   type: 'line',
   data,
   options,
 }
 
-const lineChart1 = new Chart(chart1, content)
-const lineChart2 = new Chart(chart2, content)
-const lineChart3 = new Chart(chart3, content)
+let lineChart1 = new Chart(chart1, content)
+let lineChart2 = new Chart(chart2, content)
+let lineChart3 = new Chart(chart3, content)
 
 let k = 0
 
 
 export default () => {
+	console.log(labels)
   labels.push(k)
   k += 1
   axios.get('rest/cmd/measures').then((response) => {
