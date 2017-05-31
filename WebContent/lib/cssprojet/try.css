@@ -5,52 +5,336 @@ body	{
 }
 
 
-
-
 header  {
 		display:flex;
         height: 8em;
         width: 100%;
-        background: #4c6ea5;
+        background: #c95328;
 		text-align:center;
 		font-family: 'Alfa Slab One', cursive;
   		color: white;
+}
 
- }
- #tete{
- 	 margin-left:40%;
- 	 font-size:20px;
+ #entete{
+ 	 padding-left:70%;
+ 	 font-size:30px;
  }
 
+#running{
+	padding-left:80%;
+	font-size:20px;
+}
+#spin{
+	font-size:40px;
+}
  
  #canvas	{
  	display:flex;
- 	background: #d87bcc;
+ 	background: #e8ddda;
  	width:75%;
  	height:45.5em;
 
  }
  #data	{
- 	display:flex;
  	width: 25%;
  	height:45.5em;
- 	background: #7fbc69;
+ 	background: #e57147;
+ 	text-align: center;
 
  }
- 
+#baspage{
+	display:flex;
+	width:100%;
+	background: #efbba7;
+
+}
 #fleche	{
- 	background: #a8b7a3;
+ 	background: #efbba7;
  	width: 100%;
  	height: 15em;
  	text-align:center;
- 	
  }
+ 
  
 #flechegauche{
 	margin-left:0%;
+	color: #3f6d23;
 
 }
 #flechedroite{
 	margin-left:5%;
+	color: #3f6d23;
 }
 
+#flechehaut{
+	color: #3f6d23;
+}
+
+#flechebas{
+	color: #3f6d23;
+}
+
+
+#basflip{
+	margin-left:10%;
+	display:flex;
+	flex-direction: column;
+
+}
+
+
+
+.flipswitch {
+  flex-direction: row-reverse;
+  position: relative;
+  width: 67px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select: none;
+}
+.flipswitch input[type=checkbox] {
+  display: none;
+}
+.flipswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #999999;
+  border-radius: 24px;
+}
+.flipswitch-inner {
+  width: 200%;
+  margin-left: -100%;
+  -webkit-transition: margin 0.3s ease-in 0s;
+  -moz-transition: margin 0.3s ease-in 0s;
+  -ms-transition: margin 0.3s ease-in 0s;
+  -o-transition: margin 0.3s ease-in 0s;
+  transition: margin 0.3s ease-in 0s;
+}
+.flipswitch-inner:before, .flipswitch-inner:after {
+  float: left;
+  width: 50%;
+  height: 21px;
+  padding: 0;
+  line-height: 21px;
+  font-size: 15px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.flipswitch-inner:before {
+  content: "ON";
+  padding-left: 12px;
+  background-color: #2E7021;
+  color: #FFFFFF;
+}
+.flipswitch-inner:after {
+  content: "OFF";
+  padding-right: 12px;
+  background-color: #EBEBEB;
+  color: #888888;
+  text-align: right;
+}
+.flipswitch-switch {
+  width: 23px;
+  margin: -1px;
+  background: #FFFFFF;
+  border: 3px solid #999999;
+  border-radius: 24px;
+  position: absolute;
+  top: 0;
+  bottom:25%;
+  right: 44px;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -ms-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+.flipswitch-cb:checked + .flipswitch-label .flipswitch-inner {
+  margin-left: 0;
+}
+.flipswitch-cb:checked + .flipswitch-label .flipswitch-switch {
+  right: 0;
+}
+
+
+
+.flipswitch2 {
+  flex-direction: row-reverse;
+  position: relative;
+  width: 67px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select: none;
+  background: #efbba7;
+}
+.flipswitch2 input[type=checkbox] {
+  display: none;
+}
+.flipswitch2-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #999999;
+  border-radius: 24px;
+}
+.flipswitch2-inner {
+  width: 200%;
+  margin-left: -100%;
+  -webkit-transition: margin 0.3s ease-in 0s;
+  -moz-transition: margin 0.3s ease-in 0s;
+  -ms-transition: margin 0.3s ease-in 0s;
+  -o-transition: margin 0.3s ease-in 0s;
+  transition: margin 0.3s ease-in 0s;
+}
+.flipswitch2-inner:before, .flipswitch2-inner:after {
+  float: left;
+  width: 50%;
+  height: 21px;
+  padding: 0;
+  line-height: 21px;
+  font-size: 15px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.flipswitch2-inner:before {
+  content: "ON";
+  padding-left: 12px;
+  background-color: #2E7021;
+  color: #FFFFFF;
+}
+.flipswitch2-inner:after {
+  content: "OFF";
+  padding-right: 12px;
+  background-color: #EBEBEB;
+  color: #888888;
+  text-align: right;
+}
+.flipswitch2-switch {
+  width: 23px;
+  margin: -1px;
+  background: #FFFFFF;
+  border: 3px solid #999999;
+  border-radius: 24px;
+  position: absolute;
+  top: 0;
+  bottom:25%;
+  right: 44px;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -ms-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+.flipswitch2-cb:checked + .flipswitch2-label .flipswitch2-inner {
+  margin-left: 0;
+}
+.flipswitch2-cb:checked + .flipswitch2-label .flipswitch2-switch {
+  right: 0;
+}
+
+
+.flipswitch3 {
+  flex-direction: row-reverse;
+  position: relative;
+  width: 67px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select: none;
+  background: #efbba7;
+}
+.flipswitch3 input[type=checkbox] {
+  display: none;
+}
+.flipswitch3-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #999999;
+  border-radius: 24px;
+}
+.flipswitch3-inner {
+  width: 200%;
+  margin-left: -100%;
+  -webkit-transition: margin 0.3s ease-in 0s;
+  -moz-transition: margin 0.3s ease-in 0s;
+  -ms-transition: margin 0.3s ease-in 0s;
+  -o-transition: margin 0.3s ease-in 0s;
+  transition: margin 0.3s ease-in 0s;
+}
+.flipswitch3-inner:before, .flipswitch3-inner:after {
+  float: left;
+  width: 50%;
+  height: 21px;
+  padding: 0;
+  line-height: 21px;
+  font-size: 15px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.flipswitch3-inner:before {
+  content: "ON";
+  padding-left: 12px;
+  background-color: #2E7021;
+  color: #FFFFFF;
+}
+.flipswitch3-inner:after {
+  content: "OFF";
+  padding-right: 12px;
+  background-color: #EBEBEB;
+  color: #888888;
+  text-align: right;
+}
+.flipswitch3-switch {
+  width: 23px;
+  margin: -1px;
+  background: #FFFFFF;
+  border: 3px solid #999999;
+  border-radius: 24px;
+  position: absolute;
+  top: 0;
+  bottom:25%;
+  right: 44px;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -ms-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+.flipswitch3-cb:checked + .flipswitch3-label .flipswitch3-inner {
+  margin-left: 0;
+}
+.flipswitch3-cb:checked + .flipswitch3-label .flipswitch3-switch {
+  right: 0;
+}
+
+
+.btn {
+  max-width:30%;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #e8bba9;
+  padding: 11px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #e39b74;
+  text-decoration: none;
+}

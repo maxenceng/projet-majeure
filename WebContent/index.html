@@ -12,27 +12,66 @@
 
 	<header>
 		<div id="tete">
-		<div id="entete">Projet majeur</div>
-		<div id="running">Running</div></div>
-		<i id="spin" class="fa fa-cog fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+			<div id="entete">Projet majeur</div>
+			<div id="running">Running
+				<i id="spin" class="fa fa-cog fa-3x fa-fw" aria-hidden="true"></i>
+			</div>
+		</div>
+		
 
 	</header>
 
 	<div id="canvas">canvas</div>
-	<div id="data">data</div>
-	<div id="fleche">
-		<div id="enhaut">
-			<a id="myButton"><i id="flechehaut" class="fa fa-arrow-up fa-5x" aria-hidden="true"></i></a>
-		</div>
-		<div id="milieu">
-			<a id="myButton5"><i id="flechegauche" class="fa fa-arrow-left fa-5x" aria-hidden="true"> </i></a>
-			<a id="myButton4"><i id="flechedroite" class="fa fa-arrow-right fa-5x" aria-hidden="true"></i></a>
-		</div>
-		<div id="enbas">
-			<a id="myButton3"><i id="flechebas" class="fa fa-arrow-down fa-5x" aria-hidden="true"></i></a>
-		</div>
+	<div id="data">
+	<div>Data</div>
+			<input type="submit" NAME="submit" value="Refresh" class="btn">
+	
 	</div>
 	
+	
+	<div id="baspage">
+		<div id="basflip">
+			<div class="flipswitch">
+				    <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs" checked>
+				    <label class="flipswitch-label" for="fs">
+				        <div class="flipswitch-inner"></div>
+				        <div class="flipswitch-switch"></div>
+				    </label>
+			</div>
+			<div id="text1"> Display 1</div>
+			<div class="flipswitch2">
+				    <input type="checkbox" name="flipswitch2" class="flipswitch2-cb" id="fs2" checked> 
+				    <label class="flipswitch2-label" for="fs2">
+				        <div class="flipswitch2-inner"></div>
+				        <div class="flipswitch2-switch"></div>
+				    </label> 
+			</div>
+			<div id="text2"> Display 2</div>
+			<div class="flipswitch3">
+				    <input type="checkbox" name="flipswitch3" class="flipswitch3-cb" id="fs3" checked>
+				    <label class="flipswitch3-label" for="fs3">
+				        <div class="flipswitch3-inner"></div>
+				        <div class="flipswitch3-switch"></div>
+				    </label> 
+			</div>
+			<div id="text3"> Display 3</div>
+	
+		</div>
+		
+		
+		<div id="fleche">
+			<div id="enhaut">
+				<a id="myButton"><i id="flechehaut" class="fa fa-arrow-up fa-5x" aria-hidden="true"></i></a>
+			</div>
+			<div id="milieu">
+				<a id="myButton5"><i id="flechegauche" class="fa fa-arrow-left fa-5x" aria-hidden="true"> </i></a>
+				<a id="myButton4"><i id="flechedroite" class="fa fa-arrow-right fa-5x" aria-hidden="true"></i></a>
+			</div>
+			<div id="enbas">
+				<a id="myButton3"><i id="flechebas" class="fa fa-arrow-down fa-5x" aria-hidden="true"></i></a>
+			</div>
+		</div>	
+	</div>
 
 	
 	<script src="lib/jquery-1.11.1.min.js"></script>
