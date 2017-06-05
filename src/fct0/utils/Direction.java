@@ -1,5 +1,11 @@
 package fct0.utils;
 
+/**
+ * Enumération définissant la direction prise par le robot,
+ * provoquant un changement des coordonnées et de l'orientation.
+ * @author
+ *
+ */
 public enum Direction {
 	UP(-1, 0, Orientation.N), 
 	DOWN(1, 0, Orientation.S), 

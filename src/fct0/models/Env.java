@@ -6,7 +6,10 @@ import java.util.Locale;
 import fct0.utils.Contenu;
 
 
-
+/**
+ * Cette classe permet de gérer l'environnement général du jeu.
+ * @author Cecile, Abdeljabar
+ */
 public class Env {
 	private double pourcentageObstacle=0;
 	private Grille grille;
@@ -27,7 +30,8 @@ public class Env {
 	}
 	
 	/**
-	 * 
+	 * Cette méthode permet de générer un environnement en mettant
+	 * aléatoirement des obstacles en fonction du pourcentage obstacle choisi.
 	 */
 	public void generateEnvironnement(){
 		grille=new Grille(tailleX,tailleY); //Création de la matrice
@@ -56,6 +60,13 @@ public class Env {
 		return this.printMatrix(matrice);
 	}
 	
+	/**
+	 * Cette méthode permet de renvoyer le contenu en fonction
+	 * des coordonnées d'une case.
+	 * @param x
+	 * @param y
+	 * @return Contenu
+	 */
 	public Contenu findContenu(int x,int y){
 		if(x < 0 || x > this.tailleX - 1 || y < 0 || y > this.tailleY - 1) {
 			return null;
@@ -63,17 +74,35 @@ public class Env {
 		return grille.getMatrice()[x][y];
 	}
 
+	/**
+	 * Cette méthode permet de modifier le contenu d'une page 
+	 * en fonction des coordonnées en paramètre
+	 * @param contenu
+	 * @param x
+	 * @param y
+	 */
 	public void setContenu(Contenu contenu,int x,int y)
 	{
 		grille.setContenuG(contenu,x,y);
 	}
+	
+	/**
+	 * Cette méthode permet de récupérer le contenu d'une case.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Contenu getContenu(int x,int y)
 	{
 		return grille.getContenuG(x,y);
 	}
 	
 	
-	
+	/**
+	 * Cette méthode permet d'afficher le jeu dans la console.
+	 * @param matrix
+	 * @return
+	 */
 	public String printMatrix(Contenu[][] matrix) {
 		StringBuilder sb = new StringBuilder();
 		Formatter formatter = new Formatter(sb, Locale.FRENCH);
@@ -99,18 +128,35 @@ public class Env {
 		return formatter.toString() ;
 	}		
 	
+	/**
+	 * Cette méthode permet de récupérer la grille.
+	 * @return Grille
+	 */
 	public Grille getGrille() {
 		return this.grille;
 	}
 	
+	/**
+	 * Cette méthode permet de récupérer la hauteur de l'environnement.
+	 * @return int
+	 */
 	public int getTailleX() {
 		return this.tailleX;
 	}
 	
+	/**
+	 * Cette méthode permet de récupérer la largeur de l'environnement
+	 * @return int
+	 */
 	public int getTailleY() {
 		return this.tailleY;
 	}
 	
+	/**
+	 * Cette méthode permet de récupérer la surface totale de l'environnement.
+	 * (nombre de case total)
+	 * @return int
+	 */
 	public int getTailleXY(){
 		int taille;
 		taille=this.tailleX*this.tailleY;

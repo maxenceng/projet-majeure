@@ -9,16 +9,20 @@ const traj = canvas1.getContext('2d')
 const canvas2 = document.getElementById('robot')
 const rob = canvas2.getContext('2d')
 
-
+/**
+ * Création des variables qui vont nous servir pour dessiner sur les canvas.
+ */
 const grass = new Image()
 const stone = new Image()
 const robot = new Image()
-
 
 grass.src = 'grass.png'
 stone.src = 'stone.png'
 robot.src = 'robot.png'
 
+/**
+ * Création des variables de position du robot.
+ */
 let posX = 0
 let posY = 0
 let deltaX = 0
@@ -26,13 +30,21 @@ let deltaY = 0
 const tabTraj = []
 let posRobotX
 let posRobotY
+
+/**
+ * Taille en pixels pris par une image.
+ */
 const size = 64
 
+/**
+ * Création de la variable qui contiendra les états aux positions x et y de l'environnement.
+ */
 const mapData = []
 
-// RECUP DONNEES CARTE
-
-export const drawMap = () => {
+/**
+ * Fonction de dessin sur les canvas à l'ouverture de la page.
+ */
+const drawMap = () => {
   for (let i = 0; i < mapData.length; i += 1) {
     for (let j = 0; j < mapData[i].length; j += 1) {
       if (mapData[i][j] === 'FREE') {
@@ -56,7 +68,9 @@ export const drawMap = () => {
   posY = 0
 }
 
-
+/**
+ * Récupère les données de l'environnement et appelle la fonction de dessin de l'environnement.
+ */
 export const drawEnv = () => {
   axios.get('rest/cmd/env').then((response) => {
     const data = response.data.donnees
@@ -72,6 +86,9 @@ export const drawEnv = () => {
   })
 }
 
+/**
+ * Dessine la trajectoire du robot.
+ */
 const drawTraj = () => {
   for (let i = 1; i < tabTraj.length; i += 1) {
     traj.beginPath()
@@ -81,12 +98,19 @@ const drawTraj = () => {
   }
 }
 
+/**
+ * Dessine le robot et fait appel au dessin de la trajectoire.
+ */
 const drawRobTraj = () => {
   rob.clearRect(0, 0, canvas.width, canvas.height)
   rob.drawImage(robot, posRobotX + deltaX, posRobotY + deltaY, size, size)
   drawTraj()
 }
 
+/**
+ * Fait bouger le robot en fonction de la direction donnée.
+ * @param direction
+ */
 export const move = (direction) => {
   switch (direction) {
     case 'UP':

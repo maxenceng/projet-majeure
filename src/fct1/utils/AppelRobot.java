@@ -10,6 +10,10 @@ import fct0.utils.Orientation;
 import fct0.utils.Direction;
 import fct0.utils.Contenu;
 
+/**
+ * Cette classe permet de récupérer le robot du jeu et de le faire se déplacer tout seul.
+ * @author Cecile, Abdeljabar
+ */
 public class AppelRobot {
 
 	private static Coord coordonnee;
@@ -19,7 +23,10 @@ public class AppelRobot {
 	
 	boolean auto=false;
 
-	
+	/**
+	 * Récupère le robot utilisé, le crée s'il n'existe pas.
+	 * @return
+	 */
 	public static RobotCrt getAppelRobot(){
 		
 		if(robotControl==null)
@@ -32,7 +39,9 @@ public class AppelRobot {
 		return robotControl;
 	}
 	
-	
+	/**
+	 * Permet de déplacer le robot sans aide extérieure.
+	 */
 	public void deplacerAuto()
 	{
 		Random rand = new Random();

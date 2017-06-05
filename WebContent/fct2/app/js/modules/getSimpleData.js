@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+/**
+ * Fonction qui récupère simplement les données de notre classe Java Measures et les insère dans notre page
+ * lors de l'appui sur le bouton Refresh.
+ */
 export default () => {
   document.querySelector('#refreshBtn').addEventListener('click', () => {
     axios.get('rest/cmd/measures').then((response) => {

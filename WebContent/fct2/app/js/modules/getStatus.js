@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+/**
+ * Adapte l'affichage de l'état du robot en fonction des données renvoyées par le serveur.
+ */
 export default () => {
   axios.get('rest/cmd/status').then((response) => {
     const status = response.data.status

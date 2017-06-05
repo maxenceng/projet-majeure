@@ -2,6 +2,12 @@ package fct0.utils;
 
 import java.io.Serializable;
 
+/**
+ * Classe permettant l'enregistrement des données x et y 
+ * des éléments du jeu dans une même variable.
+ * @author 
+ *
+ */
 public class Coord implements Serializable {
 	private int x;
 	private int y;
