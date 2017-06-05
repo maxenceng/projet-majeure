@@ -5,14 +5,15 @@ import axios from 'axios'
 const chart1 = document.querySelector('#myChart1')
 const chart2 = document.querySelector('#myChart2')
 const chart3 = document.querySelector('#myChart3')
+const chart4 = document.querySelector('#myChart4')
 
-let labels = []
-let nbreCommande = []
-let distanceParcourue = []
-let nbreObstRencontres = []
-let nbreObstVisible = []
+const labels = []
+const nbreCommande = []
+const distanceParcourue = []
+const nbreObstRencontres = []
+const nbreObstVisible = []
 
-let data = {
+const data = {
   labels,
   datasets: [
     {
@@ -32,21 +33,21 @@ const options = {
   },
 }
 
-let content = {
+const content = {
   type: 'line',
   data,
   options,
 }
 
-let lineChart1 = new Chart(chart1, content)
-let lineChart2 = new Chart(chart2, content)
-let lineChart3 = new Chart(chart3, content)
+const lineChart1 = new Chart(chart1, content)
+const lineChart2 = new Chart(chart2, content)
+const lineChart3 = new Chart(chart3, content)
+const lineChart4 = new Chart(chart4, content)
 
 let k = 0
 
 
 export default () => {
-	console.log(labels)
   labels.push(k)
   k += 1
   axios.get('rest/cmd/measures').then((response) => {
@@ -61,7 +62,10 @@ export default () => {
     lineChart2.data.datasets[0].data = distanceParcourue
     lineChart2.update()
     lineChart3.data.labels = labels
-    lineChart3.data.datasets[0].data = nbreObstVisible
+    lineChart3.data.datasets[0].data = nbreObstRencontres
     lineChart3.update()
+    lineChart4.data.labels = labels
+    lineChart4.data.datasets[0].data = nbreObstVisible
+    lineChart4.update()
   })
 }

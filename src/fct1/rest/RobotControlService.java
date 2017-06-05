@@ -134,12 +134,9 @@ public class RobotControlService {
 			int y=0;
 			int tailleX=robotControl.getEnv().getTailleX();
 			int tailleY=robotControl.getEnv().getTailleY();
-			int tailleXY=robotControl.getEnv().getTailleXY();
 			Contenu currentContenu;
 			
-			
 			JSONArray list = new JSONArray();
-			
 			for(x=0;x<tailleX;x++)
 			{
 				for(y=0;y<tailleY;y++)
@@ -148,9 +145,7 @@ public class RobotControlService {
 					JSONObject objVal1 = new JSONObject();
 					currentContenu=robotControl.getEnv().getGrille().getContenuG(x,y);		
 					objVal1.put("etat",currentContenu.toString());
-					//list.add(objVal1);
 					objVal1.put("x",x);
-					//list.add(objVal1);	
 					objVal1.put("y",y);	
 					list.add(objVal1);
 
@@ -163,8 +158,6 @@ public class RobotControlService {
 			
 		
 			//return json string of the json container
-			return objContainer.toJSONString();
-
-	
+			return objContainer.toJSONString();	
 		}
 }

@@ -2,17 +2,16 @@ import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
 import sass from '../sass/index.sass'
 import chartes from './modules/chartes'
-import { move, test, drawMapFinal } from './modules/carte'
+import { move, drawEnv } from './modules/carte'
 
-setInterval(chartes(), 1)
+setInterval(chartes, 5000)
 
 // PARTIE CARTE
 
-test()
+drawEnv()
 
 document.querySelector('#btnUp').addEventListener('click', () => {
   axios.post('rest/cmd/UP', {}).then((response) => {
-    console.log(response.data)
     if (response.data === 'OK') {
       move('UP')
     }
@@ -21,7 +20,6 @@ document.querySelector('#btnUp').addEventListener('click', () => {
 
 document.querySelector('#btnLeft').addEventListener('click', () => {
   axios.post('rest/cmd/LEFT', {}).then((response) => {
-    console.log(response.data)
     if (response.data === 'OK') {
       move('LEFT')
     }
@@ -30,7 +28,6 @@ document.querySelector('#btnLeft').addEventListener('click', () => {
 
 document.querySelector('#btnRight').addEventListener('click', () => {
   axios.post('rest/cmd/RIGHT', {}).then((response) => {
-    console.log(response.data)
     if (response.data === 'OK') {
       move('RIGHT')
     }
@@ -39,7 +36,6 @@ document.querySelector('#btnRight').addEventListener('click', () => {
 
 document.querySelector('#btnDown').addEventListener('click', () => {
   axios.post('rest/cmd/DOWN', {}).then((response) => {
-    console.log(response.data)
     if (response.data === 'OK') {
       move('DOWN')
     }

@@ -27,75 +27,24 @@ const tabTraj = []
 let posRobotX
 let posRobotY
 
-let mapData = []
+const mapData = []
 
 // RECUP DONNEES CARTE
-export const drawMapFinal = () => {
-	  for (let i = 0; i < mapData.length; i += 1) {
-	    for (let j = 0; j < mapData[i].length; j += 1) {
-	      if (mapData[i][j] === "FREE") {
-	        map.drawImage(grass, posX, posY, 32, 32)
-	      }
-	      if (mapData[i][j] === "OBSTACLE") {
-	        map.drawImage(stone, posX, posY, 32, 32)
-	      }
-	      if (mapData[i][j] === "ROBOT") {
-	        map.drawImage(grass, posX, posY, 32, 32)
-	        posRobotX = posX
-	        posRobotY = posY
-	        rob.drawImage(robot, posRobotX, posRobotY, 32, 32)
-	      }
-	      posX += 32
-	    }
-	    posX = 0
-	    posY += 32
-	  }
-	  posY = 0
-}
-
-
-export const test = () => {
-	axios.get('rest/cmd/env').then((response) => {
-		  let data = response.data.donnees
-		  let length = data.length
-		  for (let i = 0; i < Math.sqrt(length); i += 1) {
-			  mapData.push(data.splice(0, 9))
-		  }
-		  for (let i = 0; i < mapData.length; i += 1) {
-			  for (let j = 0; j < mapData[i].length; j += 1) {
-				  mapData[i][j] = mapData[i][j].etat
-			  }
-		  }
-		  drawMapFinal()
-		})
-}
-
-const mapArray = [
-  [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-
-
 export const drawMap = () => {
-  for (let i = 0; i < mapArray.length; i += 1) {
-    for (let j = 0; j < mapArray[i].length; j += 1) {
-      if (mapArray[i][j] === 0) {
+  for (let i = 0; i < mapData.length; i += 1) {
+    for (let j = 0; j < mapData[i].length; j += 1) {
+      if (mapData[i][j] === 'FREE') {
         map.drawImage(grass, posX, posY, 32, 32)
       }
-      if (mapArray[i][j] === 1) {
+      if (mapData[i][j] === 'OBSTACLE') {
         map.drawImage(stone, posX, posY, 32, 32)
       }
-      if (mapArray[i][j] === 2) {
+      if (mapData[i][j] === 'ROBOT') {
         map.drawImage(grass, posX, posY, 32, 32)
         posRobotX = posX
         posRobotY = posY
         rob.drawImage(robot, posRobotX, posRobotY, 32, 32)
+        tabTraj.push([posRobotX, posRobotY])
       }
       posX += 32
     }
@@ -106,6 +55,20 @@ export const drawMap = () => {
 }
 
 
+export const drawEnv = () => {
+  axios.get('rest/cmd/env').then((response) => {
+    const data = response.data.donnees
+    for (let i = 0; i < 8; i += 1) {
+      mapData.push(data.splice(0, 15))
+    }
+    for (let i = 0; i < mapData.length; i += 1) {
+      for (let j = 0; j < mapData[i].length; j += 1) {
+        mapData[i][j] = mapData[i][j].etat
+      }
+    }
+    drawMap()
+  })
+}
 
 const drawTraj = () => {
   for (let i = 1; i < tabTraj.length; i += 1) {
@@ -126,7 +89,7 @@ export const move = (direction) => {
   switch (direction) {
     case 'UP':
       deltaY -= 32
-      if (deltaY < 0) {
+      if (posRobotY + deltaY < 0) {
         deltaY = 0
       }
       tabTraj.push([posRobotX + deltaX, posRobotY + deltaY])
@@ -134,7 +97,7 @@ export const move = (direction) => {
       break
     case 'DOWN':
       deltaY += 32
-      if (deltaY > canvas.height - 32) {
+      if (posRobotY + deltaY > canvas.height - 32) {
         deltaY = canvas.height - 32
       }
       tabTraj.push([posRobotX + deltaX, posRobotY + deltaY])
@@ -142,7 +105,7 @@ export const move = (direction) => {
       break
     case 'LEFT':
       deltaX -= 32
-      if (deltaX < 0) {
+      if (posRobotX + deltaX < 0) {
         deltaX = 0
       }
       tabTraj.push([posRobotX + deltaX, posRobotY + deltaY])
@@ -150,7 +113,7 @@ export const move = (direction) => {
       break
     case 'RIGHT':
       deltaX += 32
-      if (deltaX > canvas.width - 32) {
+      if (posRobotX + deltaX > canvas.width - 32) {
         deltaX = canvas.width - 32
       }
       tabTraj.push([posRobotX + deltaX, posRobotY + deltaY])

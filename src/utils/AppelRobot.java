@@ -22,10 +22,9 @@ public class AppelRobot {
 		{
 			coordonnee=new Coord(2,1);
 			robinet=new Robot(coordonnee,Orientation.S);
-			environnement=new Env(9,9,30);
+			environnement=new Env(8,15,30);
 			robotControl=new RobotCrt(environnement,robinet);
 		}
 		return robotControl;
-		
 	}
 }
