@@ -1,4 +1,4 @@
-package utils;
+package fct1.utils;
 
 public class AppelStatus {
 	private static String status;

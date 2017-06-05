@@ -1,14 +1,24 @@
 import axios from 'axios'
-// eslint-disable-next-line no-unused-vars
-import sass from '../sass/index.sass'
 import chartes from './modules/chartes'
 import { move, drawEnv } from './modules/carte'
-
-setInterval(chartes, 5000)
-
-// PARTIE CARTE
+import getStatus from './modules/getStatus'
+import getSimpleData from './modules/getSimpleData'
 
 drawEnv()
+getStatus()
+setInterval(chartes, 1000)
+getSimpleData()
+
+document.querySelector('#fs').addEventListener('click', () => {
+  if (!document.querySelector('#fs').checked) {
+    document.querySelector('#chartes').classList.add('hidden')
+    document.querySelector('#simple').classList.remove('hidden')
+  } else {
+    document.querySelector('#chartes').classList.remove('hidden')
+    document.querySelector('#simple').classList.add('hidden')
+  }
+})
+
 
 document.querySelector('#btnUp').addEventListener('click', () => {
   axios.post('rest/cmd/UP', {}).then((response) => {

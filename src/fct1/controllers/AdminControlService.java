@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import utils.AppelStatus;
+import fct1.utils.AppelStatus;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

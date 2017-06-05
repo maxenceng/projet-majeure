@@ -1,41 +1,88 @@
 <!DOCTYPE HTML>
 <html>
 <meta charset="UTF-8" />
-<title>test</title>
-<style>
-  #stage {
-    width: 480px;
-    height: 256px;
-    position: relative;
-    border: 2px solid black
-  }
-  div#stage canvas { position: absolute; }
-  #robot { z-index: 3 }
-  #traj { z-index: 2 }
-  #carte { z-index: 1 }
-</style>
+<title>Projet Majeure</title>
+<link rel="stylesheet" href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="lib/cssprojet/try.css">
+<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
 <body>
-  <div class="container">
-  <div id="stage">
-<canvas id="traj" height="256px" width="480px"> </canvas>
-<canvas id="robot" height="256px" width="480px"> </canvas>
-<canvas id="carte" height="256px" width="480px"> </canvas>
-</div>
-    <div id="fleches">
-      <div><button id="btnUp">UP</button></div>
-      <div>
-	<button id="btnLeft">LEFT</button>
-	<button id="btnRight">RIGHT</button>
-      </div>
-      <div><button id="btnDown">DOWN</button></div>
+<header>
+    <h1>Projet Majeure</h1>
+    <div id="running">
+        <span id="state">Running</span>
+        <i id="spinner" class="fa fa-cog fa-3x fa-fw fa-spin" aria-hidden="true"></i>
     </div>
-  </div>
-  <div id="graphes">
-    <canvas id="myChart1" width="256" height="128"></canvas>
-    <canvas id="myChart2" width="256" height="128"></canvas>
-    <canvas id="myChart3" width="256" height="128"></canvas>
-    <canvas id="myChart4" width="256" height="128"></canvas>
-  </div>
+</header>
+<div class="center-page">
+    <div id="flip">
+        <div class="flipswitch">
+            <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs" checked>
+            <label class="flipswitch-label" for="fs">
+                <div class="flipswitch-inner"></div>
+                <div class="flipswitch-switch"></div>
+            </label>
+        </div>
+        <div> Affichage chartes</div>
+        <div class="flipswitch">
+            <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs2" checked>
+            <label class="flipswitch-label" for="fs2">
+                <div class="flipswitch-inner"></div>
+                <div class="flipswitch-switch"></div>
+            </label>
+        </div>
+        <div> Display 2</div>
+        <div class="flipswitch">
+            <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs3" checked>
+            <label class="flipswitch-label" for="fs3">
+                <div class="flipswitch-inner"></div>
+                <div class="flipswitch-switch"></div>
+            </label>
+        </div>
+        <div> Display 3</div>
+    </div>
+    <div>
+        <div id="stage">
+            <canvas id="traj" height="512px" width="768px"></canvas>
+            <canvas id="robot" height="512px" width="768px"></canvas>
+            <canvas id="carte" height="512px" width="768px"></canvas>
+         </div>
+    </div>
+    <div id="data">
+    	<div id="chartes">
+	        <span>Nombre de commandes</span>
+	        <canvas id="myChart1" width="256" height="128"></canvas>
+	        <span>Distance parcourue</span>
+	        <canvas id="myChart2" width="256" height="128"></canvas>
+	        <span>Obstacles rencontrés</span>
+	        <canvas id="myChart3" width="256" height="128"></canvas>
+	        <span>Obstacles visibles</span>
+	        <canvas id="myChart4" width="256" height="128"></canvas>
+        </div>
+        <div id="simple" class="hidden">
+            <div><p>Nombre de commandes : <span id="ajaxData1"></span></p></div>
+		    <div><p>Distance parcourue : <span id="ajaxData2"></span></p></div>
+		    <div><p>Obstacles rencontrés : <span id="ajaxData3"></span></p></div>
+		    <div><p>Obstacles visibles : <span id="ajaxData4"></span></p></div>
+		    <div><button class="btn" id="refreshBtn">Refresh</button></div>
+        </div>
+    </div>
+</div>
+<div id="baspage">
+
+	<div id="fleche-group">
+		<div id="enhaut">
+			<a id="btnUp"><i class="fleche fa fa-arrow-up fa-5x" aria-hidden="true"></i></a>
+		</div>
+		<div id="milieu">
+			<a id="btnLeft"><i class="fleche gauche fa fa-arrow-left fa-5x" aria-hidden="true"></i></a>
+			<a id="btnRight"><i class="fleche droite fa fa-arrow-right fa-5x" aria-hidden="true"></i></a>
+		</div>
+		<div id="enbas">
+			<a id="btnDown"><i class="fleche fa fa-arrow-down fa-5x" aria-hidden="true"></i></a>
+		</div>
+	</div>	
+</div>
 </body>
 <script src="fct2/dist/bundle.js"></script>
 </html>

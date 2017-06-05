@@ -26,30 +26,32 @@ let deltaY = 0
 const tabTraj = []
 let posRobotX
 let posRobotY
+const size = 64
 
 const mapData = []
 
 // RECUP DONNEES CARTE
+
 export const drawMap = () => {
   for (let i = 0; i < mapData.length; i += 1) {
     for (let j = 0; j < mapData[i].length; j += 1) {
       if (mapData[i][j] === 'FREE') {
-        map.drawImage(grass, posX, posY, 32, 32)
+        map.drawImage(grass, posX, posY, size, size)
       }
       if (mapData[i][j] === 'OBSTACLE') {
-        map.drawImage(stone, posX, posY, 32, 32)
+        map.drawImage(stone, posX, posY, size, size)
       }
       if (mapData[i][j] === 'ROBOT') {
-        map.drawImage(grass, posX, posY, 32, 32)
+        map.drawImage(grass, posX, posY, size, size)
         posRobotX = posX
         posRobotY = posY
-        rob.drawImage(robot, posRobotX, posRobotY, 32, 32)
+        rob.drawImage(robot, posRobotX, posRobotY, size, size)
         tabTraj.push([posRobotX, posRobotY])
       }
-      posX += 32
+      posX += size
     }
     posX = 0
-    posY += 32
+    posY += size
   }
   posY = 0
 }
@@ -59,7 +61,7 @@ export const drawEnv = () => {
   axios.get('rest/cmd/env').then((response) => {
     const data = response.data.donnees
     for (let i = 0; i < 8; i += 1) {
-      mapData.push(data.splice(0, 15))
+      mapData.push(data.splice(0, 12))
     }
     for (let i = 0; i < mapData.length; i += 1) {
       for (let j = 0; j < mapData[i].length; j += 1) {
@@ -81,14 +83,14 @@ const drawTraj = () => {
 
 const drawRobTraj = () => {
   rob.clearRect(0, 0, canvas.width, canvas.height)
-  rob.drawImage(robot, posRobotX + deltaX, posRobotY + deltaY, 32, 32)
+  rob.drawImage(robot, posRobotX + deltaX, posRobotY + deltaY, size, size)
   drawTraj()
 }
 
 export const move = (direction) => {
   switch (direction) {
     case 'UP':
-      deltaY -= 32
+      deltaY -= size
       if (posRobotY + deltaY < 0) {
         deltaY = 0
       }
@@ -96,15 +98,15 @@ export const move = (direction) => {
       drawRobTraj()
       break
     case 'DOWN':
-      deltaY += 32
-      if (posRobotY + deltaY > canvas.height - 32) {
-        deltaY = canvas.height - 32
+      deltaY += size
+      if (posRobotY + deltaY > canvas.height - size) {
+        deltaY = canvas.height - size
       }
       tabTraj.push([posRobotX + deltaX, posRobotY + deltaY])
       drawRobTraj()
       break
     case 'LEFT':
-      deltaX -= 32
+      deltaX -= size
       if (posRobotX + deltaX < 0) {
         deltaX = 0
       }
@@ -112,9 +114,9 @@ export const move = (direction) => {
       drawRobTraj()
       break
     case 'RIGHT':
-      deltaX += 32
-      if (posRobotX + deltaX > canvas.width - 32) {
-        deltaX = canvas.width - 32
+      deltaX += size
+      if (posRobotX + deltaX > canvas.width - size) {
+        deltaX = canvas.width - size
       }
       tabTraj.push([posRobotX + deltaX, posRobotY + deltaY])
       drawRobTraj()

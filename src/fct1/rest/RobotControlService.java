@@ -15,8 +15,6 @@ import javax.ws.rs.core.MediaType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import utils.AppelRobot;
-import utils.AppelStatus;
 import fct0.controllers.RobotCrt;
 import fct0.models.Env;
 import fct0.models.Measures;
@@ -26,6 +24,8 @@ import fct0.utils.Orientation;
 import fct0.utils.Direction;
 import fct0.utils.Contenu;
 import fct1.controllers.AdminControlService;
+import fct1.utils.AppelRobot;
+import fct1.utils.AppelStatus;
 
 
 @Path("/cmd")
