@@ -2,12 +2,20 @@ package fct0.models;
 
 import fct0.utils.Orientation;
 
+/**
+ * Cette classe permet de gérer le capteur du robot.
+ * @author Maxence, Zhi
+ *
+ */
 public class Capteur {
 	
 	private static final int LEN = 7;
 	
 	private Integer[][] matrice = new Integer[LEN][LEN];
 	
+	/**
+	 * Le constructeur initialise le capteur du robot.
+	 */
 	public Capteur() {
 		for(int i = 0; i < LEN; i ++) {
 			for(int j = 0; j < LEN; j++) {
@@ -32,6 +40,10 @@ public class Capteur {
 		return s;
 	}
 	
+	/**
+	 * Cette méthode permet la rotation à Droite du capteur lorsque 
+	 * lorsque le robot change de direction
+	 */
 	private void rotationDroite() {
 		Integer[][] rotate = new Integer[LEN][LEN];
 		for(int i = 0; i < LEN; i ++) {
@@ -42,6 +54,11 @@ public class Capteur {
 		this.matrice = rotate;
 	}
 	
+	
+	/**
+	 * Cette méthode permet la rotation à Gauche du capteur lorsque 
+	 * lorsque le robot change de direction
+	 */
 	private void rotationGauche() {
 		Integer[][] rotate = new Integer[LEN][LEN];
 		for(int i = 0; i < LEN; i ++) {
@@ -52,7 +69,13 @@ public class Capteur {
 		this.matrice = rotate;
 	}
 	
-	
+	/**
+	 * Cette méthode permet de mettre à jour la nouvelle orientation 
+	 * de la matrice.
+	 * 
+	 * @param ancienne
+	 * @param nouvelle
+	 */
 	public void updateMatrice(Orientation ancienne, Orientation nouvelle) {
 		int diff = nouvelle.ordinal() - ancienne.ordinal();
 		if(diff == 1 || diff == -3) {
@@ -67,6 +90,10 @@ public class Capteur {
 		}
 	}
 	
+	/**
+	 * Cette méthode de retourner 
+	 * @return
+	 */
 	public Integer[][] getMatrice() {
 		return this.matrice;
 	}
