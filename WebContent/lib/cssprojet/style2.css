@@ -1,69 +1,110 @@
-#monForm {
-   position:absolute;
-   top:50%;
-   left:50%;
-   width:350px; /* A toi de donner la bonne largeur */
-   height:300px; /* A toi de donner la bonne hauteur */
-   margin-left:-150px; /* -largeur/2 */
-   margin-top:-200px; /* -hauteur/2 */
-   background:black;
-   border-radius: 10px;
-   
+.header  {
+        height: 40%;
+        margin: auto;
+	padding-top:10%;
+	text-align:center;
+ }
+
+.form
+ {  
+  margin:0px;  
+  width:100%;
+  padding:0px;
+  margin-top: 50px;
+  margin-left:0;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+ }
+ 
+ 
+#administration{
+
+  font-size:4rem;
+  font-family: 'Alfa Slab One', cursive;
+  color: #203960;
+  margin-top:-5%;
+  padding-top:0.5%;
 }
 
-label
-{
-  color:white;
-  display: block;
-  width: 28%;
-  float: left;
+
+#spin{
+  color: #203960;
+  margin-top:20px;
+
 }
 
+#started{
+  font-size:2rem;
+  color: #203960;
+  font-family: 'Alfa Slab One', cursive;
 
 
-.myButton {
-	background-color:#44c767;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:10px 37px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
-}
-.myButton:hover {
-	background-color:#5cbf2a;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
+  position:center;
+  margin-top:20px;
+  padding-top:0.5%;
+
 }
   
-.myButton1 {
-	background-color:#44c767;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:10px 47px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
-	 margin-left:20px;
+ 
+ #boutons
+ {
+  display:flex;
+  justify-content:center; 
+  margin-top:20px;
+  margin-bottom:20px;
+  padding:20px;
+  flex-wrap:wrap;
+
+
+ }
+ 
+
+input
+{
+  width:150px;
+
+  padding:5px;
+  margin:10px;
 }
-.myButton1:hover {
-	background-color:#5cbf2a;
+
+
+.bouton17 {
+	min-width:25%;
+	height:100%;
+	background:#fafafa;
+
+	font:bold 200% Arial;
+	border-radius:50px;
+	border-width:1px;
+	border-color:#000;
+	color:#555;
+	/*margin-left:33%;*/
 }
-.myButton1:active {
-	position:relative;
-	top:1px;
+
+.bouton18 {
+
+	min-width:25%;
+	height:10%;
+	background:rgba(0, 0, 255, 0.5);;
+	font:bold 200% Arial;
+	border-radius:50px;
+	border:none;
+	color:#fff;
+	/*margin-left:7%;*/
+}
+
+.bouton13 {
+
+	width:150px;
+	border:none;
+
+	border-radius:8px;
+	padding-top:10px;
+	padding-bottom:10px;
+	background:#000;
+	font-size:25px;
+	color:#fff;
+
 }

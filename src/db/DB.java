@@ -10,7 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import fct1.models.AdminModel;
-
+/**
+ * cette classe permet de la creation de la connection avec
+ * le base de donnee, de recuperer les utilisateur et aussi de 
+ * verifier le mot de passe avec l'utilisateur
+ */
 public class DB {
 	// Dev Ecole
 	/*
@@ -26,7 +30,9 @@ public class DB {
 	private static final String DB_USER="root";
 	private static final String DB_PWD="root";
 	private Connection connection;
-	
+	/**
+	 * Ce constructeur permet d'établir une connection avec le base de donnee 
+	 */
 	public DB() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -40,6 +46,12 @@ public class DB {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * cette méthode permet de recuper les utilisateur dans notre
+	 * base de donnee
+	 * @return liste des utilisateurs
+	 */
 
 	public ArrayList<AdminModel> getAllUser() {
 		ArrayList<AdminModel> userList = new ArrayList<AdminModel>();
@@ -60,6 +72,12 @@ public class DB {
 		return userList;
 	}
 
+	/**
+	 * cette methode permet la verification de mot de passe avec l'utilisateur currant
+	 * @param login
+	 * @param pwd
+	 * @return l'utilisateur si le mot de passe est correct
+	 */
 	public AdminModel checkUser(String login, String pwd) {
 		ArrayList<AdminModel> userList=new ArrayList<AdminModel>();
 		userList=this.getAllUser();

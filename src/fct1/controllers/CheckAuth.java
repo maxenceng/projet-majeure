@@ -28,6 +28,8 @@ public class CheckAuth extends HttpServlet {
     }
 
 	/**
+	 * la methode doGet permet de recuperer l'information de login et de verifier le mot de pass
+	 * afin de diriger vers la page admin.jsp
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

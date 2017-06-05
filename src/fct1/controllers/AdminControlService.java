@@ -30,6 +30,8 @@ public class AdminControlService extends HttpServlet {
     }
 
 	/**
+	 * la methode doGet qui permet de recuperer la session de l'adminstrateur contacte et une application de status courant
+	 * et a partir de l'état actuel de notre robot, l'administrateur peut relancer le robot ou de l'arrete.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
